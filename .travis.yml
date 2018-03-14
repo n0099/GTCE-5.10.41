@@ -1,5 +1,7 @@
 language: java
 sudo: true
+before_install:
+ - chmod +x gradlew
 task wrapper(type: Wrapper) {
     gradleVersion = '4.4'
 }
