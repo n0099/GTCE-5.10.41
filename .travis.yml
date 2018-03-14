@@ -4,5 +4,5 @@ dist: trusty
 before_install:
 - chmod +x ./gradlew
 script:
-- gradlew setupDecompWorkspace
-- gradlew build
+- ./gradlew setupDecompWorkspace
+- ./gradlew build
