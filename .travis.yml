@@ -1,5 +1,6 @@
 language: java
-sudo: true
+sudo: required 
+dist: trusty
 before_install:
  - chmod +x gradlew
 task wrapper(type: Wrapper) {
