@@ -6,3 +6,5 @@ before_install:
 script:
 - ./gradlew setupDecompWorkspace
 - ./gradlew build
+deploy:
+  skip_cleanup: true
