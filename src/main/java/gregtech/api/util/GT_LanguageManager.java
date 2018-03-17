@@ -66,11 +66,10 @@ public class GT_LanguageManager {
         if (aKey == null) {
             return E;
         }
-        if(LOCALIZATION.containsKey(aKey) &&
-                !LOCALIZATION.get(aKey).equals(
-                net.minecraft.util.text.translation.I18n.translateToLocal(aKey))) {
+        if (LOCALIZATION.containsKey(aKey) && !LOCALIZATION.get(aKey).equals(net.minecraft.util.text.translation.I18n.translateToLocal(aKey))) {
             injectAllLocales();
         }
+        GT_Log.out.println("getTranslation, key: " + aKey + " return: " + net.minecraft.util.text.translation.I18n.translateToLocal(aKey));
         return net.minecraft.util.text.translation.I18n.translateToLocal(aKey);
     }
 
