@@ -1,6 +1,5 @@
 package gregtech.api.util;
 
-
 import gregtech.api.GregTech_API;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.Locale;
@@ -33,7 +32,6 @@ public class GT_LanguageManager {
             BUFFERMAP = new HashMap<>();
 
     public static Configuration sEnglishFile;
-    //TODO implement 03f6c9e
 
     public static String addStringLocalization(String aKey, String aEnglish) {
         return addStringLocalization(aKey, aEnglish, false);
@@ -44,29 +42,36 @@ public class GT_LanguageManager {
             return E;
         if (aWriteIntoLangFile)
             aEnglish = writeToLangFile(aKey, aEnglish);
-        LOCALIZATION.put(aKey, aEnglish);
+        // LOCALIZATION.put(aKey, aEnglish);
         return aEnglish;
     }
 
-    public static synchronized HashMap readFromLangFile(String langFilePath) {
+    public static synchronized void readFromLangFile(String langFilePath) {
         List<String> langFileRows = new ArrayList<String>();
-        File langFile = new File(langFilePath);
-        if (langFile.exists() && langFile.isFile()) {
-            InputStreamReader streamReader = new InputStreamReader(new FileInputStream(langFile), "UTF-8");
-            BufferedReader bufferReader = new BufferedReader(streamReader);
-            String readerCurrentRow = null;
-            while ((readerCurrentRow = bufferReader.readLine()) != null) {
-                langFileRows.add(readerCurrentRow);
-            }
-            readerCurrentRow = null;
-            bufferReader.close();
-            streamReader.close();
-            HashMap<String, String> returnHashMap = new HashMap<>();
-            for (String langFileCurrentRow : langFileRows) {
-                String langKey = langFileCurrentRow.substring(langFileCurrentRow.indexOf("S:\"") + 3, langFileCurrentRow.indexOf("\"="));
-                String langContent = langFileCurrentRow.substring(langFileCurrentRow.indexOf("\"=") + 2);
-                GT_Log.out.println("reading lang file line: " + langKey + " | " + langContent);
-                returnHashMap.put(langKey, langContent);
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            File langFile = new File(langFilePath);
+            if (langFile.exists() & langFile.isFile()) {
+                try {
+                    InputStreamReader streamReader = new InputStreamReader(new FileInputStream(langFile), "UTF-8");
+                    BufferedReader bufferReader = new BufferedReader(streamReader);
+                    String readerCurrentRow = null;
+                    while ((readerCurrentRow = bufferReader.readLine()) != null) {
+                        langFileRows.add(readerCurrentRow);
+                    }
+                    readerCurrentRow = null;
+                    bufferReader.close();
+                    streamReader.close();
+                    for (String langFileCurrentRow : langFileRows) {
+                        if (langFileCurrentRow.contains("S:")) {
+                            String langKey = langFileCurrentRow.substring(langFileCurrentRow.indexOf("S:") + 2, langFileCurrentRow.indexOf("="));
+                            String langContent = langFileCurrentRow.substring(langFileCurrentRow.indexOf("=") + 1);
+                            // GT_Log.out.println("reading lang file line: " + langKey + " | " + langContent);
+                            LOCALIZATION.put(langKey, langContent);
+                        }
+                    }
+                } catch (Exception e) {
+                    GT_Log.out.println(e.getMessage());
+                }                
             }
         }
     }
@@ -98,7 +103,6 @@ public class GT_LanguageManager {
         if (LOCALIZATION.containsKey(aKey) && !LOCALIZATION.get(aKey).equals(net.minecraft.util.text.translation.I18n.translateToLocal(aKey))) {
             injectAllLocales();
         }
-        GT_Log.out.println("getTranslation, key: " + aKey + " return: " + net.minecraft.util.text.translation.I18n.translateToLocal(aKey));
         return net.minecraft.util.text.translation.I18n.translateToLocal(aKey);
     }
 
