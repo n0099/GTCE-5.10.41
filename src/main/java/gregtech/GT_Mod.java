@@ -247,10 +247,6 @@ public class GT_Mod implements IGT_Mod {
         GT_Log.out.println("GT_Mod: Saving Main Config");
         tMainConfig.save();
 
-        GT_Log.out.println("GT_Mod: Generating Lang-File");
-        GT_LanguageManager.sEnglishFile = new Configuration(new File(aEvent.getModConfigurationDirectory().getParentFile(), "GregTech.lang"));
-        GT_LanguageManager.sEnglishFile.load();
-
         GT_Log.out.println("GT_Mod: Removing all original Scrapbox Drops.");
         try {
             GT_Utility.getField("ic2.core.item.ItemScrapbox$Drop", "topChance", true, true).set(null, Integer.valueOf(0));
@@ -669,8 +665,13 @@ public class GT_Mod implements IGT_Mod {
         GT_Log.out.println("GT_Mod: Adding buffered Recipes.");
         GT_ModHandler.stopBufferingCraftingRecipes();
 
-        GT_Log.out.println("GT_Mod: Saving Lang File.");
-        GT_LanguageManager.sEnglishFile.save();
+        GT_Log.out.println("GT_Mod: Generating Lang-File");
+        GT_LanguageManager.sEnglishFile = new Configuration(new File(aEvent.getModConfigurationDirectory().getParentFile(), "GregTech.lang"));
+        GT_LanguageManager.sEnglishFile.load();
+
+        //GT_Log.out.println("GT_Mod: Saving Lang File.");
+        //GT_LanguageManager.sEnglishFile.save();
+
         GregTech_API.sPostloadFinished = true;
         GT_Log.out.println("GT_Mod: PostLoad-Phase finished!");
         GT_Log.ore.println("GT_Mod: PostLoad-Phase finished!");
