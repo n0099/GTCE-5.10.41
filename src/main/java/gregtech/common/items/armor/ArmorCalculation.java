@@ -220,8 +220,10 @@ public class ArmorCalculation {
 							def[31] += 250;
 							break;
 						}
+					/*
 					} else if (parts[i].getItem().equals(ItemList.Cell_Empty.getItem())) {
 						def[15] += 8000;
+					*/
 					} else if (parts[i].getItem().getUnlocalizedName().equals("gt.meta.cell")) {// Once Readded: GT Fluid Cells (tank)
 						switch (parts[i].getItem().getDamage(parts[i])) {
 						case 8630: // steel fluid cell
