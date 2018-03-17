@@ -666,7 +666,7 @@ public class GT_Mod implements IGT_Mod {
         GT_ModHandler.stopBufferingCraftingRecipes();
 
         GT_Log.out.println("GT_Mod: Generating Lang-File");
-        GT_LanguageManager.sEnglishFile = new Configuration(new File(aEvent.getModConfigurationDirectory().getParentFile(), "GregTech.lang"));
+        GT_LanguageManager.sEnglishFile = new Configuration(new File("GregTech.lang"));
         GT_LanguageManager.sEnglishFile.load();
 
         //GT_Log.out.println("GT_Mod: Saving Lang File.");
