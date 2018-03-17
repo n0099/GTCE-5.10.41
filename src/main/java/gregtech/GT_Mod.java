@@ -261,6 +261,9 @@ public class GT_Mod implements IGT_Mod {
         GT_LanguageManager.sEnglishFile = new Configuration(new File("GregTech.lang"));
         GT_LanguageManager.sEnglishFile.load();
 
+        GT_Log.out.println("GT_Mod: Loading Lang-File");
+        GT_LanguageManager.LOCALIZATION = GT_LanguageManager.readFromLangFile("GregTech.lang");
+
         GT_Log.out.println("GT_Mod: Adding Scrap with a Weight of 200.0F to the Scrapbox Drops.");
         GT_ModHandler.addScrapboxDrop(200.0F, GT_ModHandler.getIC2Item(ItemName.crafting, CraftingItemType.scrap, 1));
 

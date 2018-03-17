@@ -12,9 +12,15 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 import static gregtech.api.enums.GT_Values.E;
 
@@ -40,6 +46,29 @@ public class GT_LanguageManager {
             aEnglish = writeToLangFile(aKey, aEnglish);
         LOCALIZATION.put(aKey, aEnglish);
         return aEnglish;
+    }
+
+    public static synchronized HashMap readFromLangFile(String langFilePath) {
+        List<String> langFileRows = new ArrayList<String>();
+        File langFile = new File(langFilePath);
+        if (langFile.exists() && langFile.isFile()) {
+            InputStreamReader streamReader = new InputStreamReader(new FileInputStream(langFile), "UTF-8");
+            BufferedReader bufferReader = new BufferedReader(streamReader);
+            String readerCurrentRow = null;
+            while ((readerCurrentRow = bufferReader.readLine()) != null) {
+                langFileRows.add(readerCurrentRow);
+            }
+            readerCurrentRow = null;
+            bufferReader.close();
+            streamReader.close();
+            HashMap<String, String> returnHashMap = new HashMap<>();
+            for (String langFileCurrentRow : langFileRows) {
+                String langKey = langFileCurrentRow.substring(langFileCurrentRow.indexOf("S:\"") + 3, langFileCurrentRow.indexOf("\"="));
+                String langContent = langFileCurrentRow.substring(langFileCurrentRow.indexOf("\"=") + 2);
+                GT_Log.out.println("reading lang file line: " + langKey + " | " + langContent);
+                returnHashMap.put(langKey, langContent);
+            }
+        }
     }
 
     private static synchronized String writeToLangFile(String aKey, String aEnglish) {
