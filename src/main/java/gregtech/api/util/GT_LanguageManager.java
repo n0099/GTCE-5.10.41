@@ -42,7 +42,6 @@ public class GT_LanguageManager {
             return E;
         if (aWriteIntoLangFile)
             aEnglish = writeToLangFile(aKey, aEnglish);
-        System.out.println("addStringLocalization: " + aKey + " | " + aEnglish);            
         LOCALIZATION.put(aKey, aEnglish);
         return aEnglish;
     }
@@ -66,7 +65,6 @@ public class GT_LanguageManager {
                         if (langFileCurrentRow.contains("S:")) {
                             String langKey = langFileCurrentRow.substring(langFileCurrentRow.indexOf("S:") + 2, langFileCurrentRow.indexOf("="));
                             String langContent = langFileCurrentRow.substring(langFileCurrentRow.indexOf("=") + 1);
-                            GT_Log.out.println("reading lang file line: " + langKey + " | " + langContent);
                             LOCALIZATION.put(langKey, langContent);
                         }
                     }
