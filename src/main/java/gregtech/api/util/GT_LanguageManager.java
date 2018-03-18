@@ -27,7 +27,7 @@ public class GT_LanguageManager {
 
     private GT_LanguageManager() {}
 
-    public static final HashMap<String, String>
+    public static HashMap<String, String>
             LOCALIZATION = new HashMap<>(),
             BUFFERMAP = new HashMap<>();
 
@@ -42,7 +42,8 @@ public class GT_LanguageManager {
             return E;
         if (aWriteIntoLangFile)
             aEnglish = writeToLangFile(aKey, aEnglish);
-        // LOCALIZATION.put(aKey, aEnglish);
+        System.out.println("addStringLocalization: " + aKey + " | " + aEnglish);            
+        LOCALIZATION.put(aKey, aEnglish);
         return aEnglish;
     }
 
@@ -65,7 +66,7 @@ public class GT_LanguageManager {
                         if (langFileCurrentRow.contains("S:")) {
                             String langKey = langFileCurrentRow.substring(langFileCurrentRow.indexOf("S:") + 2, langFileCurrentRow.indexOf("="));
                             String langContent = langFileCurrentRow.substring(langFileCurrentRow.indexOf("=") + 1);
-                            // GT_Log.out.println("reading lang file line: " + langKey + " | " + langContent);
+                            GT_Log.out.println("reading lang file line: " + langKey + " | " + langContent);
                             LOCALIZATION.put(langKey, langContent);
                         }
                     }
