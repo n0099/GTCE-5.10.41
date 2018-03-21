@@ -217,17 +217,18 @@ public class ArmorCalculation {
 								def[31] += 250;
 								break;
 						}
-						//} else if (parts[i].getItem().equals(ItemList.Cell_Empty.getItem())) {
-						//	def[15] += 8000;
-					} else if (part.getItem().getUnlocalizedName().equals("gt.meta.cell")) {// Once Readded: GT Fluid Cells (tank)
-						switch (part.getItem().getDamage(part)) {
-							case 8630: // steel fluid cell
-								def[15] += 16000;
-								break;
-							case 8631: // tungsten fluid cell
-								def[15] += 64000;
-								break;
-						}
+					/*} else if (parts[i].getItem().equals(ItemList.Cell_Empty.getItem())) {
+					 *	def[15] += 8000;
+					 *} else if (part.getItem().getUnlocalizedName().equals("gt.meta.cell")) {// Once Readded: GT Fluid Cells (tank)
+					 *	switch (part.getItem().getDamage(part)) {
+					 *		case 8630: // steel fluid cell
+					 *			def[15] += 16000;
+					 *			break;
+					 *		case 8631: // tungsten fluid cell
+					 *			def[15] += 64000;
+					 *			break;
+					 *	}
+					 */
 					} else if (part.getItem().getUnlocalizedName().equals("gt.meta.emmiter")) {// Once Readded: GT Field Emmiter
 						switch (part.getItem().getDamage(part)) {
 							case 8630:
