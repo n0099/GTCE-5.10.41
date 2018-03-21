@@ -23,8 +23,8 @@ import static gregtech.api.enums.GT_Values.M;
 
 public class Materials implements IColorModulationContainer, ISubTagContainer {
 	private static Materials[] MATERIALS_ARRAY = new Materials[]{};
-	private static final Map<String, Materials> MATERIALS_MAP = new LinkedHashMap<String, Materials>();
-	public static final List<IMaterialHandler> mMaterialHandlers = new ArrayList<IMaterialHandler>();
+	private static final Map<String, Materials> MATERIALS_MAP = new LinkedHashMap<>();
+	public static final List<IMaterialHandler> mMaterialHandlers = new ArrayList<>();
 
 	/**
 	 * This is the Default Material returned in case no Material has been found or a NullPointer has been inserted at a location where it shouldn't happen.
@@ -715,11 +715,11 @@ public class Materials implements IColorModulationContainer, ISubTagContainer {
 	public int mMetaItemSubID;
 	public boolean mUnificatable;
 	public Materials mMaterialInto;
-	public List<MaterialStack> mMaterialList = new ArrayList<MaterialStack>();
-	public List<Materials> mOreByProducts = new ArrayList<Materials>(), mOreReRegistrations = new ArrayList<Materials>();
-	public List<TC_Aspects.TC_AspectStack> mAspects = new ArrayList<TC_Aspects.TC_AspectStack>();
-	public ArrayList<ItemStack> mMaterialItems = new ArrayList<ItemStack>();
-	public Collection<SubTag> mSubTags = new LinkedHashSet<SubTag>();
+	public List<MaterialStack> mMaterialList = new ArrayList<>();
+	public List<Materials> mOreByProducts = new ArrayList<>(), mOreReRegistrations = new ArrayList<>();
+	public List<TC_Aspects.TC_AspectStack> mAspects = new ArrayList<>();
+	public ArrayList<ItemStack> mMaterialItems = new ArrayList<>();
+	public Collection<SubTag> mSubTags = new LinkedHashSet<>();
 	public Enchantment mEnchantmentTools = null, mEnchantmentArmors = null;
 	public byte mEnchantmentToolsLevel = 0, mEnchantmentArmorsLevel = 0;
 	public boolean mBlastFurnaceRequired = false, mTransparent = false;

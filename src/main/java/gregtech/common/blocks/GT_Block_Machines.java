@@ -3,7 +3,6 @@ package gregtech.common.blocks;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.IDebugableBlock;
-import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.ICoverable;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -12,7 +11,6 @@ import gregtech.api.metatileentity.BaseMetaPipeEntity;
 import gregtech.api.metatileentity.BaseMetaTileEntity;
 import gregtech.api.metatileentity.BaseTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_TieredMachineBlock;
-import gregtech.api.objects.GT_RenderedTexture;
 import gregtech.api.util.GT_LanguageManager;
 import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_Utility;
@@ -280,7 +278,7 @@ public class GT_Block_Machines extends GT_Generic_Block implements IDebugableBlo
         if (gregTechTileEntity.getTimer() < 50L) {
             return false;
         }
-        if (gregTechTileEntity.isUseableByPlayer(playerIn)) {
+        if (gregTechTileEntity.isUsableByPlayer(playerIn)) {
             return gregTechTileEntity.onRightclick(playerIn, (byte) side.getIndex(), hitX, hitY, hitZ, EnumHand.MAIN_HAND);
         }
         return false;
@@ -298,8 +296,8 @@ public class GT_Block_Machines extends GT_Generic_Block implements IDebugableBlo
 
     @Override
     @SideOnly(Side.CLIENT)
-    public TextureAtlasSprite getParticleSprite(IBlockAccess worldObj, BlockPos aPos, EnumFacing side) {
-        IGregTechTileEntity tileEntity = getGregTile(worldObj, aPos);
+    public TextureAtlasSprite getParticleSprite(IBlockAccess world, BlockPos aPos, EnumFacing side) {
+        IGregTechTileEntity tileEntity = getGregTile(world, aPos);
         if(tileEntity != null) {
             IMetaTileEntity metaTileEntity = tileEntity.getMetaTileEntity();
             if(metaTileEntity instanceof GT_MetaTileEntity_TieredMachineBlock) {
@@ -461,7 +459,7 @@ public class GT_Block_Machines extends GT_Generic_Block implements IDebugableBlo
             if(placer == null) {
                 gregTechTileEntity.setFrontFacing((byte) 1);
             } else {
-                int var7 = MathHelper.floor_double(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 0x3;
+                int var7 = MathHelper.floor(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 0x3;
                 int var8 = Math.round(placer.rotationPitch);
                 if ((var8 >= 65) && (gregTechTileEntity.isValidFacing((byte) 1))) {
                     gregTechTileEntity.setFrontFacing((byte) 1);
@@ -488,7 +486,7 @@ public class GT_Block_Machines extends GT_Generic_Block implements IDebugableBlo
 
     @Override
     public ArrayList<String> getDebugInfo(EntityPlayer placer, int aX, int aY, int aZ, int aLogLevel) {
-        TileEntity tTileEntity = placer.worldObj.getTileEntity(new BlockPos(aX, aY, aZ));
+        TileEntity tTileEntity = placer.world.getTileEntity(new BlockPos(aX, aY, aZ));
         if ((tTileEntity instanceof BaseMetaTileEntity)) {
             return ((BaseMetaTileEntity) tTileEntity).getDebugInfo(placer, aLogLevel);
         }

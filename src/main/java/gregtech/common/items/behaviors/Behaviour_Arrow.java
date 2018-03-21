@@ -84,7 +84,7 @@ public class Behaviour_Arrow
             tEntityArrow.setThrowableHeading(tFacing.getFrontOffsetX(), tFacing.getFrontOffsetY() + 0.1F, tFacing.getFrontOffsetZ(), this.mSpeedMultiplier * 1.1F, this.mPrecision);
             tEntityArrow.setArrowStack(aStack);
             tEntityArrow.setPickup(EntityArrow.PickupStatus.ALLOWED);
-            aWorld.spawnEntityInWorld(tEntityArrow);
+            aWorld.spawnEntity(tEntityArrow);
             if (aStack.stackSize < 100) {
                 aStack.stackSize -= 1;
             }
@@ -103,7 +103,7 @@ public class Behaviour_Arrow
         if (!hasProjectile(aItem, aProjectileType, aStack)) {
             return null;
         }
-        GT_Entity_Arrow rArrow = (GT_Entity_Arrow) GT_Utility.callConstructor(this.mArrow.getName(), -1, null, true, new Object[]{aWorld, Double.valueOf(aX), Double.valueOf(aY), Double.valueOf(aZ)});
+        GT_Entity_Arrow rArrow = (GT_Entity_Arrow) GT_Utility.callConstructor(this.mArrow.getName(), -1, null, true, new Object[]{aWorld, aX, aY, aZ});
         rArrow.setArrowStack(aStack);
         return rArrow;
     }
@@ -113,7 +113,7 @@ public class Behaviour_Arrow
         if (!hasProjectile(aItem, aProjectileType, aStack)) {
             return null;
         }
-        GT_Entity_Arrow rArrow = (GT_Entity_Arrow) GT_Utility.callConstructor(this.mArrow.getName(), -1, null, true, new Object[]{aWorld, aEntity, Float.valueOf(this.mSpeedMultiplier * aSpeed)});
+        GT_Entity_Arrow rArrow = (GT_Entity_Arrow) GT_Utility.callConstructor(this.mArrow.getName(), -1, null, true, new Object[]{aWorld, aEntity, this.mSpeedMultiplier * aSpeed});
         rArrow.setArrowStack(aStack);
         return rArrow;
     }

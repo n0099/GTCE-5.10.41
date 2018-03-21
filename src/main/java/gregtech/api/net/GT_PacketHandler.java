@@ -38,10 +38,10 @@ public class GT_PacketHandler extends SimpleNetworkWrapper {
             IThreadListener listener;
             World world;
             if(ctx.side == Side.SERVER) {
-                world = ctx.getServerHandler().playerEntity.worldObj;
+                world = ctx.getServerHandler().playerEntity.world;
                 listener = world.getMinecraftServer();
             } else {
-                world = GT_Mod.gregtechproxy.getThePlayer().worldObj;
+                world = GT_Mod.gregtechproxy.getThePlayer().world;
                 listener = Minecraft.getMinecraft();
             }
             listener.addScheduledTask(() -> {

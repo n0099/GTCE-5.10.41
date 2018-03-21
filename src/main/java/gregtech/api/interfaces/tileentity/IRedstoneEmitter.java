@@ -3,7 +3,7 @@ package gregtech.api.interfaces.tileentity;
 /**
  * This File has just internal Information about the Redstone State of a TileEntity
  */
-public interface IRedstoneEmitter extends IHasWorldObjectAndCoords {
+public interface IRedstoneEmitter extends IHasworldectAndCoords {
     /**
      * gets the Redstone Level the TileEntity should emit to the given Output Side
      */

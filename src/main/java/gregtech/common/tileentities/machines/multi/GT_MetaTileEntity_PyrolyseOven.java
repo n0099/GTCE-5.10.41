@@ -199,7 +199,7 @@ public class GT_MetaTileEntity_PyrolyseOven extends GT_MetaTileEntity_MultiBlock
                 if (aBaseMetaTileEntity.getBlock(xPos, tY, zPos) == GregTech_API.sBlockCasings1 &&
                     aBaseMetaTileEntity.getMetaID(xPos, tY, zPos) == 13)
                 {
-                    aBaseMetaTileEntity.getWorldObj().setBlockState(
+                    aBaseMetaTileEntity.getworld().setBlockState(
                             new BlockPos(xPos, tY, zPos),
                             GregTech_API.sBlockCasings5.getStateFromMeta(1), 3);
                 }

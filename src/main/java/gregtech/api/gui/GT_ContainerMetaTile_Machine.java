@@ -176,6 +176,6 @@ public class GT_ContainerMetaTile_Machine extends GT_Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return mTileEntity.isUseableByPlayer(player);
+        return mTileEntity.isUsableByPlayer(player);
     }
 }

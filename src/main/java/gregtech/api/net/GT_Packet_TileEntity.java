@@ -1,15 +1,10 @@
 package gregtech.api.net;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
-import gregtech.api.GregTech_API;
 import gregtech.api.metatileentity.BaseMetaPipeEntity;
 import gregtech.api.metatileentity.BaseMetaTileEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class GT_Packet_TileEntity extends GT_Packet {
@@ -86,7 +81,7 @@ public class GT_Packet_TileEntity extends GT_Packet {
             TileEntity tTileEntity = aWorld.getTileEntity(new BlockPos(mX, mY, mZ));
             if(tTileEntity == null) {
                 tTileEntity = isPipeBaseTile ? new BaseMetaPipeEntity() : new BaseMetaTileEntity();
-                tTileEntity.setWorldObj(aWorld);
+                tTileEntity.setworld(aWorld);
                 tTileEntity.setPos(new BlockPos(mX, mY, mZ));
                 aWorld.setTileEntity(new BlockPos(mX, mY, mZ), tTileEntity);
             }

@@ -202,9 +202,7 @@ public class GT_Container_BasicMachine extends GT_Container_BasicTank {
         mItemTransfer = ((GT_MetaTileEntity_BasicMachine) mTileEntity.getMetaTileEntity()).mItemTransfer;
         mStuttering = ((GT_MetaTileEntity_BasicMachine) mTileEntity.getMetaTileEntity()).mStuttering;
 
-        Iterator<IContainerListener> var2 = this.listeners.iterator();
-        while (var2.hasNext()) {
-            IContainerListener var1 = var2.next();
+        for (IContainerListener var1 : this.listeners) {
             var1.sendProgressBarUpdate(this, 102, mFluidTransfer ? 1 : 0);
             var1.sendProgressBarUpdate(this, 103, mItemTransfer ? 1 : 0);
             var1.sendProgressBarUpdate(this, 104, mStuttering ? 1 : 0);

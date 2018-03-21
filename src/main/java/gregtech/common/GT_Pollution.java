@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -130,8 +129,8 @@ public class GT_Pollution {
 									if(tPollution > GT_Mod.gregtechproxy.mPollutionVegetationLimit){
 										int f = 20;
 										for(;f<(tPollution/25000);f++){
-											int x =tPos.chunkXPos<<4+(tRan.nextInt(16));;
-											int y =60 +(-f+tRan.nextInt(f*2+1));
+											int x =tPos.chunkXPos<<4+(tRan.nextInt(16));
+                                            int y =60 +(-f+tRan.nextInt(f*2+1));
 											int z =tPos.chunkZPos<<4+(tRan.nextInt(16));
 											damageBlock(new BlockPos(x, y, z), tPollution > GT_Mod.gregtechproxy.mPollutionSourRainLimit);
 										}}}}

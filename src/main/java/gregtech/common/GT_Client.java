@@ -231,9 +231,9 @@ public class GT_Client extends GT_Proxy
             EntityPlayer aPlayer = aEvent.getPlayer();
             ItemStack currentItem = aPlayer.getHeldItemMainhand();
             BlockPos aPos = aEvent.getTarget().getBlockPos();
-            Block block = aPlayer.worldObj.getBlockState(aPos).getBlock();
+            Block block = aPlayer.world.getBlockState(aPos).getBlock();
             if (GT_Utility.isStackValid(currentItem)) {
-                TileEntity aTileEntity = aPlayer.worldObj.getTileEntity(aPos);
+                TileEntity aTileEntity = aPlayer.world.getTileEntity(aPos);
                 if (((aTileEntity instanceof BaseMetaPipeEntity)) && (((ICoverable) aTileEntity).getCoverIDAtSide((byte) aEvent.getTarget().sideHit.getIndex()) == 0) && ((GT_Utility.isStackInList(currentItem, GregTech_API.sCoverItems.keySet())) || (GT_Utility.isStackInList(currentItem, GregTech_API.sCrowbarList)) || (GT_Utility.isStackInList(currentItem, GregTech_API.sScrewdriverList)))) {
                     drawGrid(aEvent);
                 }

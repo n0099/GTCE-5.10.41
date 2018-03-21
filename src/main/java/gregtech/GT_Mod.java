@@ -249,7 +249,7 @@ public class GT_Mod implements IGT_Mod {
 
         GT_Log.out.println("GT_Mod: Removing all original Scrapbox Drops.");
         try {
-            GT_Utility.getField("ic2.core.item.ItemScrapbox$Drop", "topChance", true, true).set(null, Integer.valueOf(0));
+            GT_Utility.getField("ic2.core.item.ItemScrapbox$Drop", "topChance", true, true).set(null, 0);
             ((List) GT_Utility.getFieldContent(GT_Utility.getFieldContent("ic2.api.recipe.Recipes", "scrapboxDrops", true, true), "drops", true, true)).clear();
         } catch (Throwable e) {
             if (GT_Values.D1) {
@@ -268,11 +268,11 @@ public class GT_Mod implements IGT_Mod {
         EntityRegistry.registerModEntity(GT_Entity_Arrow_Potion.class, "GT_Entity_Arrow_Potion", 2, GT_Values.GT, 160, 1, true);
 
         System.out.println("preReader");
-        List<String> oreTags = new ArrayList<String>();
+        List<String> oreTags = new ArrayList<>();
         if(Loader.isModLoaded("MineTweaker3")){
             File globalDir = new File("scripts");
             if (globalDir.exists()){
-                List<String> scripts = new ArrayList<String>();
+                List<String> scripts = new ArrayList<>();
                 for (File file : globalDir.listFiles()) {
                     if (file.getName().endsWith(".zs")) {
                         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -325,7 +325,7 @@ public class GT_Mod implements IGT_Mod {
         }
         String[] preS = new String[]{"dustTiny","dustSmall","dust","dustImpure","dustPure","crushed","crushedPurified","crushedCentrifuged","gem","nugget","ingot","ingotHot","ingotDouble","ingotTriple","ingotQuadruple","ingotQuintuple","plate","plateDouble","plateTriple","plateQuadruple","plateQuintuple","plateDense","stick","lens","round","bolt","screw","ring","foil","cell","cellPlasma","toolHeadSword", "toolHeadPickaxe", "toolHeadShovel", "toolHeadAxe", "toolHeadHoe", "toolHeadHammer", "toolHeadFile", "toolHeadSaw", "toolHeadDrill", "toolHeadChainsaw", "toolHeadWrench", "toolHeadUniversalSpade", "toolHeadSense", "toolHeadPlow", "toolHeadArrow", "toolHeadBuzzSaw", "turbineBlade", "wireFine", "gearGtSmall", "rotor", "stickLong", "springSmall", "spring", "arrowGtWood", "arrowGtPlastic", "gemChipped", "gemFlawed", "gemFlawless", "gemExquisite", "gearGt","crateGtDust", "crateGtIngot", "crateGtGem", "crateGtPlate"};
 
-        List<String> mMTTags = new ArrayList<String>();
+        List<String> mMTTags = new ArrayList<>();
         for(String test : oreTags){
             if(StringUtils.startsWithAny(test, preS)){
                 mMTTags.add(test);
@@ -542,7 +542,7 @@ public class GT_Mod implements IGT_Mod {
             GT_ModHandler.removeRecipeByOutput(ItemList.IC2_ForgeHammer.getWildcard(1));
         }
         GT_ModHandler.removeRecipeByOutput(GT_ModHandler.getIC2Item(BlockName.resource, ResourceBlock.machine, 1));
-        GT_ModHandler.addCraftingRecipe(GT_ModHandler.getIC2Item(BlockName.resource, ResourceBlock.machine, 1), GT_ModHandler.RecipeBits.BUFFERED | GT_ModHandler.RecipeBits.NOT_REMOVABLE | GT_ModHandler.RecipeBits.REVERSIBLE, new Object[]{"RRR", "RwR", "RRR", Character.valueOf('R'), OrePrefixes.plate.get(Materials.Iron)});
+        GT_ModHandler.addCraftingRecipe(GT_ModHandler.getIC2Item(BlockName.resource, ResourceBlock.machine, 1), GT_ModHandler.RecipeBits.BUFFERED | GT_ModHandler.RecipeBits.NOT_REMOVABLE | GT_ModHandler.RecipeBits.REVERSIBLE, new Object[]{"RRR", "RwR", "RRR", 'R', OrePrefixes.plate.get(Materials.Iron)});
         ItemStack ISdata0 = new ItemStack(Items.POTIONITEM, 1, 0);
         ItemStack ILdata0 = ItemList.Bottle_Empty.get(1L, new Object[0]);
         for (FluidContainerRegistry.FluidContainerData tData : FluidContainerRegistry.getRegisteredFluidContainerData()) {

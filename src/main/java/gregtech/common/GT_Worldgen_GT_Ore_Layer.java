@@ -1,6 +1,5 @@
 package gregtech.common;
 
-import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.Materials;
 import gregtech.api.world.GT_Worldgen;

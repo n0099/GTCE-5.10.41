@@ -71,18 +71,18 @@ public class GT_FoodStat implements IFoodStat {
         ItemStack tStack = GT_OreDictUnificator.get(GT_Utility.copy(mEmptyContainer));
         if (tStack != null && !aPlayer.inventory.addItemStackToInventory(tStack))
             aPlayer.dropItem(tStack, true);
-        aPlayer.worldObj.playSound(aPlayer, aPlayer.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.VOICE, 0.5F, aPlayer.worldObj.rand.nextFloat() * 0.1F + 0.9F);
-        if (!aPlayer.worldObj.isRemote) {
+        aPlayer.world.playSound(aPlayer, aPlayer.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.VOICE, 0.5F, aPlayer.world.rand.nextFloat() * 0.1F + 0.9F);
+        if (!aPlayer.world.isRemote) {
             if (mMilk) {
                 aPlayer.curePotionEffects(new ItemStack(Items.MILK_BUCKET, 1, 0));
             }
             for (int i = 3; i < mPotionEffects.length; i += 4) {
-                if (aPlayer.worldObj.rand.nextInt(100) < mPotionEffects[i]) {
+                if (aPlayer.world.rand.nextInt(100) < mPotionEffects[i]) {
                     aPlayer.addPotionEffect(new PotionEffect(Potion.getPotionById(mPotionEffects[i - 3]), mPotionEffects[i - 2], mPotionEffects[i - 1], false, mInvisibleParticles));
                 }
             }
             if (mExplosive) {
-                aPlayer.worldObj.newExplosion(aPlayer, aPlayer.posX, aPlayer.posY, aPlayer.posZ, 4, true, true);
+                aPlayer.world.newExplosion(aPlayer, aPlayer.posX, aPlayer.posY, aPlayer.posZ, 4, true, true);
                 aPlayer.attackEntityFrom(GT_DamageSources.getExplodingDamage(), Float.MAX_VALUE);
             }
         }

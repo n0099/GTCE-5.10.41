@@ -191,7 +191,7 @@ public class GT_Block_Reinforced extends GT_Generic_Block {
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         if(!world.isRemote && state.getValue(METADATA) == 5){
             EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, player);
-            world.spawnEntityInWorld(entitytntprimed);
+            world.spawnEntity(entitytntprimed);
             world.playSound((EntityPlayer)null, pos, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
             world.setBlockToAir(pos);
@@ -220,7 +220,7 @@ public class GT_Block_Reinforced extends GT_Generic_Block {
         if (!world.isRemote && world.getBlockState(pos).getValue(METADATA) == 5) {
             EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, (double)((float)pos.getX() + 0.5F), (double)pos.getY(), (double)((float)pos.getZ() + 0.5F), explosion.getExplosivePlacedBy());
             entitytntprimed.setFuse(world.rand.nextInt(entitytntprimed.getFuse() / 4) + entitytntprimed.getFuse() / 8);
-            world.spawnEntityInWorld(entitytntprimed);
+            world.spawnEntity(entitytntprimed);
         }
         super.onBlockExploded(world, pos, explosion);
     }

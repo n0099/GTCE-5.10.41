@@ -80,7 +80,7 @@ public class GT_MetaTileEntity_Boiler_Steel extends GT_MetaTileEntity_Boiler {
                 for (EnumFacing side : EnumFacing.VALUES) {
                     if (side.getIndex() != aBaseMetaTileEntity.getFrontFacing() && side != EnumFacing.DOWN) {
                         int drain = GT_Utility.fillFluidTank(
-                                aBaseMetaTileEntity.getWorldObj(),
+                                aBaseMetaTileEntity.getworld(),
                                 aBaseMetaTileEntity.getWorldPos(), side,
                                 getDrainableStack());
                         if (drain != 0) {

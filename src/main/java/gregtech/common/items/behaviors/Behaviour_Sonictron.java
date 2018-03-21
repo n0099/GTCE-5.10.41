@@ -117,7 +117,7 @@ public class Behaviour_Sonictron
         int tCurrentIndex = getCurrentIndex(aStack);
         if ((tTickTimer++ % 2 == 0) && (tCurrentIndex > -1)) {
             ItemStack[] tInventory = getNBTInventory(aStack);
-            GT_Values.GT.doSonictronSound(tInventory[tCurrentIndex], aPlayer.worldObj, aPlayer.posX, aPlayer.posY, aPlayer.posZ);
+            GT_Values.GT.doSonictronSound(tInventory[tCurrentIndex], aPlayer.world, aPlayer.posX, aPlayer.posY, aPlayer.posZ);
             tCurrentIndex++;
             if (tCurrentIndex > 63) {
                 tCurrentIndex = -1;

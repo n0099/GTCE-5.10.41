@@ -6,8 +6,6 @@ import gregtech.api.util.GT_Utility;
 import ic2.api.energy.tile.IEnergyAcceptor;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
-import ic2.api.energy.tile.IEnergySource;
-import ic2.api.tile.IEnergyStorage;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -20,9 +18,9 @@ import static gregtech.api.enums.GT_Values.V;
  * <p/>
  * This is all you need to connect to the GT Network.
  * IColoredTileEntity is needed for not connecting differently coloured Blocks to each other.
- * IHasWorldObjectAndCoords is needed for the InWorld related Stuff. @BaseTileEntity does implement most of that Interface.
+ * IHasworldectAndCoords is needed for the InWorld related Stuff. @BaseTileEntity does implement most of that Interface.
  */
-public interface IEnergyConnected extends IColoredTileEntity, IHasWorldObjectAndCoords, IEnergyAcceptor, IEnergyEmitter {
+public interface IEnergyConnected extends IColoredTileEntity, IHasworldectAndCoords, IEnergyAcceptor, IEnergyEmitter {
     /**
      * Inject Energy Call for Electricity. Gets called by EnergyEmitters to inject Energy into your Block
      * <p/>
@@ -31,22 +29,22 @@ public interface IEnergyConnected extends IColoredTileEntity, IHasWorldObjectAnd
      * @param aSide 0 - 5 = Vanilla Directions of YOUR Block the Energy gets inserted to. 6 = No specific Side (don't do Side checks for this Side)
      * @return amount of used Amperes. 0 if not accepted anything.
      */
-    public long injectEnergyUnits(byte aSide, long aVoltage, long aAmperage);
+    long injectEnergyUnits(byte aSide, long aVoltage, long aAmperage);
 
     /**
      * Sided Energy Input
      */
-    public boolean inputEnergyFrom(byte aSide);
+    boolean inputEnergyFrom(byte aSide);
 
     /**
      * Sided Energy Output
      */
-    public boolean outputsEnergyTo(byte aSide);
+    boolean outputsEnergyTo(byte aSide);
 
     /**
      * Utility for the Network
      */
-    public static class Util {
+    class Util {
         /**
          * Emits Energy to the E-net. Also compatible with adjacent IC2 TileEntities.
          *
