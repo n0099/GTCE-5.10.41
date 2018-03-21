@@ -2,7 +2,6 @@ package gregtech.api.net;
 
 import gregtech.api.util.GT_Utility;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 

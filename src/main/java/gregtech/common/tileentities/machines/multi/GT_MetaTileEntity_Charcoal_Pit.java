@@ -117,7 +117,7 @@ public class GT_MetaTileEntity_Charcoal_Pit extends GT_MetaTileEntity_MultiBlock
         if (running) {
             for (BlockPos tPos : tList1) {
                 if (isWoodLog(this.getBaseMetaTileEntity().getBlockStateOffset(tPos.getX(), tPos.getY(), tPos.getZ())))
-                    this.getBaseMetaTileEntity().getWorldObj().setBlockState(
+                    this.getBaseMetaTileEntity().getworld().setBlockState(
                             getBaseMetaTileEntity().getWorldPos().add(tPos.getX(), tPos.getY(), tPos.getZ()),
                             GregTech_API.sBlockReinforced.getStateFromMeta(4), 3);
             }

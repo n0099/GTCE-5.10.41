@@ -236,7 +236,6 @@ public class GT_Achievements {
         if (!GT_Mod.gregtechproxy.mAchievements) {
             return null;
         }
-        ;
         Achievement achievement = new Achievement(textId, textId, this.adjX + x, this.adjY + y, icon, getAchievement(requirement));
         if (special) {
             achievement.setSpecial();

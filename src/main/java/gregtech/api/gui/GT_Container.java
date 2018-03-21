@@ -76,7 +76,7 @@ public class GT_Container extends Container {
     }
 
     /**
-     * Override this Function with something like "return mTileEntity.isUseableByPlayer(aPlayer);"
+     * Override this Function with something like "return mTileEntity.isUsableByPlayer(aPlayer);"
      */
     @Override
     public boolean canInteractWith(EntityPlayer aPlayer) {

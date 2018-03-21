@@ -2,18 +2,13 @@ package gregtech.jei;
 
 import gregtech.api.util.GT_LanguageManager;
 import gregtech.api.util.GT_Recipe;
-import mezz.jei.Internal;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
-import mezz.jei.gui.DrawableBlank;
 import mezz.jei.gui.DrawableResource;
 import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.config.GuiUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;

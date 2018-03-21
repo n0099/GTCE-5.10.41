@@ -62,7 +62,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
@@ -83,12 +82,12 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
             OreGenEvent.GenerateMinable.EventType.IRON, OreGenEvent.GenerateMinable.EventType.GOLD,
             OreGenEvent.GenerateMinable.EventType.DIAMOND, OreGenEvent.GenerateMinable.EventType.REDSTONE, OreGenEvent.GenerateMinable.EventType.LAPIS,
             OreGenEvent.GenerateMinable.EventType.QUARTZ);
-    public final HashSet<ItemStack> mRegisteredOres = new HashSet<ItemStack>(10000);
-    public final ArrayList<String> mSoundNames = new ArrayList<String>();
-    public final ArrayList<ItemStack> mSoundItems = new ArrayList<ItemStack>();
-    public final ArrayList<Integer> mSoundCounts = new ArrayList<Integer>();
-    private final Collection<OreDictEventContainer> mEvents = new HashSet<OreDictEventContainer>();
-    private final Collection<String> mIgnoredItems = new HashSet<String>(Arrays.asList(new String[]{"itemGhastTear", "itemFlint", "itemClay", "itemBucketSaltWater",
+    public final HashSet<ItemStack> mRegisteredOres = new HashSet<>(10000);
+    public final ArrayList<String> mSoundNames = new ArrayList<>();
+    public final ArrayList<ItemStack> mSoundItems = new ArrayList<>();
+    public final ArrayList<Integer> mSoundCounts = new ArrayList<>();
+    private final Collection<OreDictEventContainer> mEvents = new HashSet<>();
+    private final Collection<String> mIgnoredItems = new HashSet<>(Arrays.asList(new String[]{"itemGhastTear", "itemFlint", "itemClay", "itemBucketSaltWater",
             "itemBucketFreshWater", "itemBucketWater", "itemRock", "itemReed", "itemArrow", "itemSaw", "itemKnife", "itemHammer", "itemChisel", "itemRubber",
             "itemEssence", "itemIlluminatedPanel", "itemSkull", "itemRawRubber", "itemBacon", "itemJetpackAccelerator", "itemLazurite", "itemIridium",
             "itemTear", "itemClaw", "itemFertilizer", "itemTar", "itemSlimeball", "itemCoke", "itemBeeswax", "itemBeeQueen", "itemForcicium", "itemForcillium",
@@ -99,7 +98,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
             "itemWhippingCream", "itemGlisteningWhippingCream", "itemCleaver", "itemHerbalMedicineWhippingCream", "itemStrangeWhippingCream",
             "itemBlazeCleaver", "itemBakedCakeSponge", "itemMagmaCake", "itemGlisteningCake", "itemOgreCleaver", "itemFishandPumpkinCake",
             "itemMagmaWhippingCream", "itemMultimeter", "itemSuperconductor"}));
-    private final Collection<String> mIgnoredNames = new HashSet<String>(Arrays.asList(new String[]{"grubBee", "chainLink", "candyCane", "bRedString", "bVial",
+    private final Collection<String> mIgnoredNames = new HashSet<>(Arrays.asList(new String[]{"grubBee", "chainLink", "candyCane", "bRedString", "bVial",
             "bFlask", "anorthositeSmooth", "migmatiteSmooth", "slateSmooth", "travertineSmooth", "limestoneSmooth", "orthogneissSmooth", "marbleSmooth",
             "honeyDrop", "lumpClay", "honeyEqualssugar", "flourEqualswheat", "bluestoneInsulated", "blockWaterstone", "blockSand", "blockTorch",
             "blockPumpkin", "blockClothRock", "blockStainedHardenedClay", "blockQuartzPillar", "blockQuartzChiselled", "blockSpawner", "blockCloth", "mobHead",
@@ -116,9 +115,9 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
             "unfinishedTank", "valvePart", "aquaRegia", "leatherSeal", "leatherSlimeSeal", "hambone", "slimeball", "clay", "enrichedUranium", "camoPaste",
             "antiBlock", "burntQuartz", "salmonRaw", "blockHopper", "blockEnderObsidian", "blockIcestone", "blockMagicWood", "blockEnderCore", "blockHeeEndium",
             "oreHeeEndPowder", "oreHeeStardust", "oreHeeIgneousRock", "oreHeeInstabilityOrb", "crystalPureFluix", "shardNether", "gemFluorite",
-            "stickObsidian", "caveCrystal", "shardCrystal", "DYECrystal","shardFire","shardWater","shardAir","shardEarth","ingotRefinedIron","blockMarble","ingotUnstable",
+            "stickObsidian", "caveCrystal", "shardCrystal", "DYECrystal", "shardFire", "shardWater", "shardAir", "shardEarth", "ingotRefinedIron", "blockMarble", "ingotUnstable",
             "blockCactus", "blockPrismarineBrick", "blockPrismarineDark", "stoneGranitePolished", "stoneDioritePolished", "stoneAndesitePolished", "doorWood", "doorIron"}));
-    private final Collection<String> mInvalidNames = new HashSet<String>(Arrays.asList(new String[]{"diamondShard", "redstoneRoot", "obsidianStick", "bloodstoneOre",
+    private final Collection<String> mInvalidNames = new HashSet<>(Arrays.asList(new String[]{"diamondShard", "redstoneRoot", "obsidianStick", "bloodstoneOre",
             "universalCable", "bronzeTube", "ironTube", "netherTube", "obbyTube", "infiniteBattery", "eliteBattery", "advancedBattery", "10kEUStore",
             "blueDye", "MonazitOre", "quartzCrystal", "whiteLuminiteCrystal", "darkStoneIngot", "invisiumIngot", "demoniteOrb", "enderGem", "starconiumGem",
             "osmoniumIngot", "tapaziteGem", "zectiumIngot", "foolsRubyGem", "rubyGem", "meteoriteGem", "adamiteShard", "sapphireGem", "copperIngot",
@@ -834,7 +833,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
             if (tSpeed > 1.0D) {
                 tSpeed = 1.0F;
             }
-            EntityArrow tArrowEntity = ((IProjectileItem) aArrow.getItem()).getProjectile(SubTag.PROJECTILE_ARROW, aArrow, aEvent.getEntityPlayer().worldObj,
+            EntityArrow tArrowEntity = ((IProjectileItem) aArrow.getItem()).getProjectile(SubTag.PROJECTILE_ARROW, aArrow, aEvent.getEntityPlayer().world,
                     aEvent.getEntityPlayer(), tSpeed * 2.0F);
             if (tSpeed >= 1.0F) {
                 tArrowEntity.setIsCritical(true);
@@ -852,7 +851,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                 tArrowEntity.setFire(tLevel * 100);
             }
             aEvent.getBow().damageItem(1, aEvent.getEntityPlayer());
-            aEvent.getEntityPlayer().worldObj.playSound(null, new BlockPos(aEvent.getEntity()),
+            aEvent.getEntityPlayer().world.playSound(null, new BlockPos(aEvent.getEntity()),
                     SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS,
                     1.0F, 0.64893958288F + tSpeed * 0.5F);
 
@@ -864,8 +863,8 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                 GT_Utility.removeNullStacksFromInventory(aEvent.getEntityPlayer().inventory);
             }
 
-            if (!aEvent.getEntityPlayer().worldObj.isRemote) {
-                aEvent.getEntityPlayer().worldObj.spawnEntityInWorld(tArrowEntity);
+            if (!aEvent.getEntityPlayer().world.isRemote) {
+                aEvent.getEntityPlayer().world.spawnEntity(tArrowEntity);
             }
 
             aEvent.setCanceled(true);
@@ -882,14 +881,14 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
 
     @SubscribeEvent
     public void onEntitySpawningEvent(EntityJoinWorldEvent aEvent) {
-        if (aEvent.getEntity() != null && !aEvent.getEntity().worldObj.isRemote) {
+        if (aEvent.getEntity() != null && !aEvent.getEntity().world.isRemote) {
             if (aEvent.getEntity() instanceof EntityItem) {
                 ((EntityItem) aEvent.getEntity()).setEntityItemStack(GT_OreDictUnificator.get(((EntityItem) aEvent.getEntity()).getEntityItem()));
             }
             if ((this.mSkeletonsShootGTArrows > 0) && (aEvent.getEntity().getClass() == EntityArrow.class)
-                    && (aEvent.getEntity().worldObj.rand.nextInt(this.mSkeletonsShootGTArrows) == 0)
+                    && (aEvent.getEntity().world.rand.nextInt(this.mSkeletonsShootGTArrows) == 0)
                     && ((((EntityArrow) aEvent.getEntity()).shootingEntity instanceof EntitySkeleton))) {
-                aEvent.getWorld().spawnEntityInWorld(new GT_Entity_Arrow(aEvent.getWorld(),
+                aEvent.getWorld().spawnEntity(new GT_Entity_Arrow(aEvent.getWorld(),
                         (EntityLivingBase) ((EntityArrow) aEvent.getEntity()).shootingEntity,
                         OrePrefixes.arrowGtWood.mPrefixedItems
                                 .get(aEvent.getWorld().rand.nextInt(OrePrefixes.arrowGtWood.mPrefixedItems.size()))));
@@ -1136,7 +1135,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                                 aMaterial.add(GT_Utility.copyAmount(1, new Object[]{aEvent.getOre()}));
 
                                 if (GregTech_API.sThaumcraftCompat != null && aPrefix.doGenerateItem(aMaterial) && !aPrefix.isIgnored(aMaterial)) {
-                                    List<TC_AspectStack> tAspects = new ArrayList<TC_AspectStack>();
+                                    List<TC_AspectStack> tAspects = new ArrayList<>();
                                     for (TC_AspectStack tAspect : aPrefix.mAspects) tAspect.addToAspectList(tAspects);
                                     if (aPrefix.mMaterialAmount >= 3628800 || aPrefix.mMaterialAmount < 0) for (TC_AspectStack tAspect : aMaterial.mAspects) tAspect.addToAspectList(tAspects);
                                     GregTech_API.sThaumcraftCompat.registerThaumcraftAspectsToItem(GT_Utility.copyAmount(1, aEvent.getOre()), tAspects, aEvent.getName());
@@ -1407,7 +1406,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                                 && (tEntity.canBePushed()) && (((EntityLivingBase) tEntity).getHealth() > 0.0F)) {
                             AxisAlignedBB boundingBox = tEntity.getCollisionBoundingBox();
                             if (boundingBox != null) {
-                                List tList = tEntity.worldObj.getEntitiesWithinAABBExcludingEntity(tEntity, boundingBox.expand(0.2D, 0.0D, 0.2D));
+                                List tList = tEntity.world.getEntitiesWithinAABBExcludingEntity(tEntity, boundingBox.expand(0.2D, 0.0D, 0.2D));
                                 Class tClass = tEntity.getClass();
                                 int tEntityCount = 1;
                                 if (tList != null) {
@@ -1439,7 +1438,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler {
                 aEvent.player.capabilities.allowEdit = false;
                 if (this.mAxeWhenAdventure) {
                     GT_Utility.sendChatToPlayer(aEvent.player, "It's dangerous to go alone! Take this.");
-                    aEvent.player.worldObj.spawnEntityInWorld(new EntityItem(aEvent.player.worldObj, aEvent.player.posX, aEvent.player.posY,
+                    aEvent.player.world.spawnEntity(new EntityItem(aEvent.player.world, aEvent.player.posX, aEvent.player.posY,
                             aEvent.player.posZ, GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.AXE, 1, Materials.Flint, Materials.Wood, null)));
                 }
             }

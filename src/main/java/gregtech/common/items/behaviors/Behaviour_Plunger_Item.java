@@ -50,7 +50,7 @@ public class Behaviour_Plunger_Item
                                     tEntity.motionX = 0.0D;
                                     tEntity.motionY = 0.0D;
                                     tEntity.motionZ = 0.0D;
-                                    aWorld.spawnEntityInWorld(tEntity);
+                                    aWorld.spawnEntity(tEntity);
                                     GT_Utility.sendSoundToPlayers(aWorld, GregTech_API.sSoundList.get(101), 1.0F, -1.0F, blockPos);
                                 }
                                 return true;

@@ -659,7 +659,7 @@ public class Textures {
         @SideOnly(Side.CLIENT)
         protected TextureAtlasSprite mIcon, mOverlay;
 
-        private ItemIcons() {
+        ItemIcons() {
             GregTech_API.sGTItemIconload.add(this);
         }
 

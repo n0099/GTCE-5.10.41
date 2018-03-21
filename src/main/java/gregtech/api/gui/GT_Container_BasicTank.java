@@ -38,9 +38,7 @@ public class GT_Container_BasicTank extends GT_ContainerMetaTile_Machine {
             mContent = ((GT_MetaTileEntity_BasicTank) mTileEntity.getMetaTileEntity()).mFluid.amount;
         else
             mContent = 0;
-        Iterator<IContainerListener> var2 = this.listeners.iterator();
-        while (var2.hasNext()) {
-            IContainerListener var1 = var2.next();
+        for (IContainerListener var1 : this.listeners) {
             var1.sendProgressBarUpdate(this, 100, mContent & 65535);
             var1.sendProgressBarUpdate(this, 101, mContent >>> 16);
         }

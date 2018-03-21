@@ -84,18 +84,18 @@ public class GT_Tool_Saw extends GT_Tool {
     public int convertBlockDrops(List<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, IBlockState aBlock, BlockPos pos, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent) {
         if (aBlock.getMaterial() == Material.LEAVES && aBlock.getBlock() instanceof IShearable) {
             IShearable shearable = (IShearable) aBlock.getBlock();
-            if (shearable.isShearable(aStack, aPlayer.worldObj, pos)) {
-                List<ItemStack> tDrops = shearable.onSheared(aStack, aPlayer.worldObj, pos, aFortune);
+            if (shearable.isShearable(aStack, aPlayer.world, pos)) {
+                List<ItemStack> tDrops = shearable.onSheared(aStack, aPlayer.world, pos, aFortune);
                 aDrops.clear();
                 aDrops.addAll(tDrops);
                 aEvent.setDropChance(1.0F);
             }
-            aPlayer.worldObj.setBlockToAir(pos);
+            aPlayer.world.setBlockToAir(pos);
         } else if ((aBlock.getMaterial() == Material.ICE ||
                 aBlock.getMaterial() == Material.PACKED_ICE)
                 && aDrops.isEmpty()) {
             aDrops.add(getBlockStack(aBlock));
-            aPlayer.worldObj.setBlockToAir(pos);
+            aPlayer.world.setBlockToAir(pos);
             aEvent.setDropChance(1.0F);
             return 1;
         }

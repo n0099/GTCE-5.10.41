@@ -1,15 +1,11 @@
 package gregtech.api.threads;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
 
 public class GT_Runnable_Sound implements Runnable {
     private final int mX, mY, mZ, mTimeUntilNextSound;

@@ -5,7 +5,6 @@ import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.items.GT_MetaGenerated_Tool;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_Utility;
-import ic2.core.block.Ic2Leaves;
 import ic2.core.ref.BlockName;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -52,7 +51,7 @@ public class GT_Tool_BranchCutter extends GT_Tool {
             if (aBlock.getBlock() == Blocks.LEAVES) {
                 aDrops.clear();
                 if ((aBlock.getValue(BlockOldLeaf.VARIANT) == BlockPlanks.EnumType.OAK &&
-                        aPlayer.worldObj.rand.nextInt(9) <= aFortune * 2)) {
+                        aPlayer.world.rand.nextInt(9) <= aFortune * 2)) {
                     aDrops.add(new ItemStack(Items.APPLE, 1, 0));
                 } else {
                     aDrops.add(new ItemStack(Blocks.SAPLING, 1, aBlock

@@ -211,7 +211,7 @@ public class GT_MetaTileEntity_MultiFurnace
                 }
                 tUsedMeta = aBaseMetaTileEntity.getMetaID(xPos, tY + 1, zPos);
                 if (tUsedMeta >= 12 && tUsedMeta <= 14 && aBaseMetaTileEntity.getBlock(xPos, tY + 1, zPos) == GregTech_API.sBlockCasings1) {
-                    aBaseMetaTileEntity.getWorldObj().setBlockState(
+                    aBaseMetaTileEntity.getworld().setBlockState(
                             new BlockPos(xPos, tY + 1, zPos),
                             GregTech_API.sBlockCasings5.getStateFromMeta(tUsedMeta - 12),
                             3);

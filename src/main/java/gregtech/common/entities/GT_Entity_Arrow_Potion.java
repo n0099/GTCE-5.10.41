@@ -48,7 +48,7 @@ public class GT_Entity_Arrow_Potion extends GT_Entity_Arrow {
     @Override
     protected void arrowHit(EntityLivingBase living) {
         for (int i = 3; i < this.mPotions.length; i += 4) {
-            if (worldObj.rand.nextInt(100) < this.mPotions[i]) {
+            if (world.rand.nextInt(100) < this.mPotions[i]) {
                 living.addPotionEffect(new PotionEffect(
                         Potion.getPotionById(this.mPotions[(i - 3)]),
                         this.mPotions[(i - 2)],

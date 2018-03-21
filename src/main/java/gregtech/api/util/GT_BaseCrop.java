@@ -9,22 +9,19 @@ import ic2.api.crops.CropCard;
 import ic2.api.crops.CropProperties;
 import ic2.api.crops.Crops;
 import ic2.api.crops.ICropTile;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static gregtech.api.enums.GT_Values.E;
 
 public class GT_BaseCrop extends CropCard {
 
-    public static ArrayList<GT_BaseCrop> sCropList = new ArrayList<GT_BaseCrop>();
+    public static ArrayList<GT_BaseCrop> sCropList = new ArrayList<>();
     private String mName = E, mDiscoveredBy = "Gregorius Techneticies";
     private int mTier = 0, mMaxSize = 0, mAfterHarvestSize = 0, mHarvestSize = 0, mStats[] = new int[5], mGrowthSpeed = 0;
     private String[] mAttributes = new String[0];
@@ -169,7 +166,7 @@ public class GT_BaseCrop extends CropCard {
     @Override
     public ItemStack getGain(ICropTile aCrop) {
         int tDrop;
-        if (mSpecialDrops != null && (tDrop = aCrop.getWorldObj().rand.nextInt((mSpecialDrops.length*2) + 2)) < mSpecialDrops.length && mSpecialDrops[tDrop] != null) {
+        if (mSpecialDrops != null && (tDrop = aCrop.getworld().rand.nextInt((mSpecialDrops.length*2) + 2)) < mSpecialDrops.length && mSpecialDrops[tDrop] != null) {
             return GT_Utility.copy(mSpecialDrops[tDrop]);
         }
         return GT_Utility.copy(mDrop);
@@ -195,7 +192,7 @@ public class GT_BaseCrop extends CropCard {
             return false;
         }
         for (int i = 1; i < this.getRootsLength(aCrop); i++) {
-            IBlockState downState = aCrop.getWorldObj().getBlockState(aCrop.getPosition().down(i));
+            IBlockState downState = aCrop.getworld().getBlockState(aCrop.getPosition().down(i));
             int tMetaID = downState.getBlock().getMetaFromState(downState);
             ItemData tAssotiation = GT_OreDictUnificator.getAssociation(new ItemStack(downState.getBlock(), 1, tMetaID));
             if (tAssotiation != null && tAssotiation.mMaterial.mMaterial == mBlock) {

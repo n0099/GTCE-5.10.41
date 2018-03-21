@@ -264,7 +264,7 @@ public class ModularArmor_Item extends GT_Generic_Item implements ISpecialArmor 
                 } else {
                     PotionEffect nv = aPlayer.getActivePotionEffect(MobEffects.NIGHT_VISION);
                     if (nv != null && nv.getAmplifier() == -3) {
-                        if (aPlayer.worldObj.isRemote) {
+                        if (aPlayer.world.isRemote) {
                             aPlayer.removeActivePotionEffect(MobEffects.NIGHT_VISION);
                         } else {
                             aPlayer.removePotionEffect(MobEffects.NIGHT_VISION);
@@ -278,9 +278,9 @@ public class ModularArmor_Item extends GT_Generic_Item implements ISpecialArmor 
             // Item Magnet
             if (data.magnet > 1) {
                 double x = aPlayer.posX;
-                double y = aPlayer.posY - (aPlayer.worldObj.isRemote ? 1.62 : 0) + 0.75;
+                double y = aPlayer.posY - (aPlayer.world.isRemote ? 1.62 : 0) + 0.75;
                 double z = aPlayer.posZ;
-                List<EntityItem> items = aPlayer.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(x - data.magnet, y - data.magnet, z - data.magnet, x + data.magnet, y + data.magnet, z + data.magnet));
+                List<EntityItem> items = aPlayer.world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(x - data.magnet, y - data.magnet, z - data.magnet, x + data.magnet, y + data.magnet, z + data.magnet));
                 for (EntityItem item : items) {
                     ItemStack stack = item.getEntityItem();
                     if (!item.isDead && stack != null) {

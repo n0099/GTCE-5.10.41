@@ -26,13 +26,13 @@ public class Behaviour_Scoop extends Behaviour_None {
     @Override
     public boolean onLeftClickEntity(GT_MetaBase_Item aItem, ItemStack aStack, EntityPlayer aPlayer, Entity aEntity, EnumHand hand) {
         if ((aEntity instanceof IEntityButterfly)) {
-            if (aPlayer.worldObj.isRemote) {
+            if (aPlayer.world.isRemote) {
                 return true;
             }
             if ((aPlayer.capabilities.isCreativeMode) || (((GT_MetaGenerated_Tool) aItem).doDamage(aStack, this.mCosts))) {
                 Object tButterfly = ((IEntityButterfly) aEntity).getButterfly();
-                ((IButterfly) tButterfly).getGenome().getPrimary().getRoot().getBreedingTracker(aEntity.worldObj, aPlayer.getGameProfile()).registerCatch((IButterfly) tButterfly);
-                aPlayer.worldObj.spawnEntityInWorld(new EntityItem(aPlayer.worldObj, aEntity.posX, aEntity.posY, aEntity.posZ, ((IButterfly) tButterfly).getGenome().getPrimary().getRoot().getMemberStack(((IButterfly) tButterfly).copy(), EnumFlutterType.BUTTERFLY)));
+                ((IButterfly) tButterfly).getGenome().getPrimary().getRoot().getBreedingTracker(aEntity.world, aPlayer.getGameProfile()).registerCatch((IButterfly) tButterfly);
+                aPlayer.world.spawnEntity(new EntityItem(aPlayer.world, aEntity.posX, aEntity.posY, aEntity.posZ, ((IButterfly) tButterfly).getGenome().getPrimary().getRoot().getMemberStack(((IButterfly) tButterfly).copy(), EnumFlutterType.BUTTERFLY)));
                 aEntity.setDead();
             }
             return true;

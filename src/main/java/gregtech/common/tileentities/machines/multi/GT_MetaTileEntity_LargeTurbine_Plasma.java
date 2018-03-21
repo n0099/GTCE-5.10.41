@@ -100,12 +100,12 @@ public class GT_MetaTileEntity_LargeTurbine_Plasma extends GT_MetaTileEntity_Lar
             int totalFlow = 0;
 
             int aFluids_sS=aFluids.size();
-            for (int i = 0; i < aFluids_sS; i++) {
-                if (aFluids.get(i).isFluidEqual(firstFuelType)) {
-                    flow = aFluids.get(i).amount; // Get all (steam) in hatch
+            for (FluidStack aFluid : aFluids) {
+                if (aFluid.isFluidEqual(firstFuelType)) {
+                    flow = aFluid.amount; // Get all (steam) in hatch
                     flow = Math.min(flow, Math.min(remainingFlow, (int) (actualOptimalFlow * 1.25f))); // try to use up to 125% of optimal flow w/o exceeding remainingFlow
-                    depleteInput(new FluidStack(aFluids.get(i), flow)); // deplete that amount
-                    this.storedFluid = aFluids.get(i).amount;
+                    depleteInput(new FluidStack(aFluid, flow)); // deplete that amount
+                    this.storedFluid = aFluid.amount;
                     remainingFlow -= flow; // track amount we're allowed to continue depleting from hatches
                     totalFlow += flow; // track total input used
                 }

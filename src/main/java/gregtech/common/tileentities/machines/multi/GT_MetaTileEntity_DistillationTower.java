@@ -1,6 +1,7 @@
 package gregtech.common.tileentities.machines.multi;
 
 import gregtech.api.GregTech_API;
+import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Textures;
 import gregtech.api.gui.GT_GUIContainer_MultiMachine;
 import gregtech.api.interfaces.ITexture;
@@ -92,33 +93,33 @@ public class GT_MetaTileEntity_DistillationTower
         byte tTier = (byte) Math.max(1, GT_Utility.getTier(tVoltage));
         FluidStack[] tFluids = (FluidStack[]) Arrays.copyOfRange(tFluidList.toArray(new FluidStack[tFluidList.size()]), 0, tFluidList.size());
         if (tFluids.length > 0) {
-        	for(int i = 0;i<tFluids.length;i++){
-            GT_Recipe tRecipe = GT_Recipe.GT_Recipe_Map.sDistillationRecipes.findRecipe(getBaseMetaTileEntity(), false, gregtech.api.enums.GT_Values.V[tTier], new FluidStack[]{tFluids[i]}, new ItemStack[]{});
-            if (tRecipe != null) {
-                if (tRecipe.isRecipeInputEqual(true, tFluids, new ItemStack[]{})) {
-                    this.mEfficiency = (10000 - (getIdealStatus() - getRepairStatus()) * 1000);
-                    this.mEfficiencyIncrease = 10000;
-                    if (tRecipe.mEUt <= 16) {
-                        this.mEUt = (tRecipe.mEUt * (1 << tTier - 1) * (1 << tTier - 1));
-                        this.mMaxProgresstime = (tRecipe.mDuration / (1 << tTier - 1));
-                    } else {
-                        this.mEUt = tRecipe.mEUt;
-                        this.mMaxProgresstime = tRecipe.mDuration;
-                        while (this.mEUt <= gregtech.api.enums.GT_Values.V[(tTier - 1)]) {
-                            this.mEUt *= 4;
-                            this.mMaxProgresstime /= 2;
+            for (FluidStack tFluid : tFluids) {
+                GT_Recipe tRecipe = GT_Recipe.GT_Recipe_Map.sDistillationRecipes.findRecipe(getBaseMetaTileEntity(), false, GT_Values.V[tTier], new FluidStack[]{tFluid}, new ItemStack[]{});
+                if (tRecipe != null) {
+                    if (tRecipe.isRecipeInputEqual(true, tFluids, new ItemStack[]{})) {
+                        this.mEfficiency = (10000 - (getIdealStatus() - getRepairStatus()) * 1000);
+                        this.mEfficiencyIncrease = 10000;
+                        if (tRecipe.mEUt <= 16) {
+                            this.mEUt = (tRecipe.mEUt * (1 << tTier - 1) * (1 << tTier - 1));
+                            this.mMaxProgresstime = (tRecipe.mDuration / (1 << tTier - 1));
+                        } else {
+                            this.mEUt = tRecipe.mEUt;
+                            this.mMaxProgresstime = tRecipe.mDuration;
+                            while (this.mEUt <= GT_Values.V[(tTier - 1)]) {
+                                this.mEUt *= 4;
+                                this.mMaxProgresstime /= 2;
+                            }
                         }
+                        if (this.mEUt > 0) {
+                            this.mEUt = (-this.mEUt);
+                        }
+                        this.mMaxProgresstime = Math.max(1, this.mMaxProgresstime);
+                        this.mOutputItems = new ItemStack[]{tRecipe.getOutput(0)};
+                        this.mOutputFluids = tRecipe.mFluidOutputs.clone();
+                        ArrayUtils.reverse(mOutputFluids);
+                        updateSlots();
+                        return true;
                     }
-                    if (this.mEUt > 0) {
-                        this.mEUt = (-this.mEUt);
-                    }
-                    this.mMaxProgresstime = Math.max(1, this.mMaxProgresstime);
-                    this.mOutputItems = new ItemStack[]{tRecipe.getOutput(0)};
-                    this.mOutputFluids = tRecipe.mFluidOutputs.clone();
-                    ArrayUtils.reverse(mOutputFluids);
-                    updateSlots();
-                    return true;
-                	}
                 }
             }
         }
@@ -162,17 +163,17 @@ public class GT_MetaTileEntity_DistillationTower
         }
         GT_MetaTileEntity_Hatch_Output[] tmpHatches = new GT_MetaTileEntity_Hatch_Output[5];
         int mOutputHatches_sS=this.mOutputHatches.size();
-        for (int i = 0; i < mOutputHatches_sS; i++) {
-            int hatchNumber = this.mOutputHatches.get(i).getBaseMetaTileEntity().getYCoord() - 1 - height;
+        for (GT_MetaTileEntity_Hatch_Output mOutputHatche : this.mOutputHatches) {
+            int hatchNumber = mOutputHatche.getBaseMetaTileEntity().getYCoord() - 1 - height;
             if (tmpHatches[hatchNumber] == null) {
-                tmpHatches[hatchNumber] = this.mOutputHatches.get(i);
+                tmpHatches[hatchNumber] = mOutputHatche;
             } else {
                 return false;
             }
         }
         this.mOutputHatches.clear();
-        for (int i = 0; i < tmpHatches.length; i++) {
-            this.mOutputHatches.add(tmpHatches[i]);
+        for (GT_MetaTileEntity_Hatch_Output tmpHatche : tmpHatches) {
+            this.mOutputHatches.add(tmpHatche);
         }
         if(this.mMaintenanceHatches.size()!=1)return false;
         return tAmount >= 36;

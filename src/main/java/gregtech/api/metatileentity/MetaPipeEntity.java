@@ -490,7 +490,7 @@ public abstract class MetaPipeEntity implements IMetaTileEntity {
 
     @Override
     public int[] getSlotsForFace(EnumFacing aSide) {
-        ArrayList<Integer> tList = new ArrayList<Integer>();
+        ArrayList<Integer> tList = new ArrayList<>();
         IGregTechTileEntity tTileEntity = getBaseMetaTileEntity();
         boolean tSkip = tTileEntity.getCoverBehaviorAtSide((byte) aSide.getIndex()).letsItemsIn((byte) aSide.getIndex(), tTileEntity.getCoverIDAtSide((byte) aSide.getIndex()), tTileEntity.getCoverDataAtSide((byte) aSide.getIndex()), -2, tTileEntity) || tTileEntity.getCoverBehaviorAtSide((byte) aSide.getIndex()).letsItemsOut((byte) aSide.getIndex(), tTileEntity.getCoverIDAtSide((byte) aSide.getIndex()), tTileEntity.getCoverDataAtSide((byte) aSide.getIndex()), -2, tTileEntity);
         for (int i = 0; i < getSizeInventory(); i++)
@@ -571,7 +571,7 @@ public abstract class MetaPipeEntity implements IMetaTileEntity {
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+    public boolean isUsableByPlayer(EntityPlayer entityplayer) {
         return false;
     }
 
@@ -623,7 +623,7 @@ public abstract class MetaPipeEntity implements IMetaTileEntity {
     public void doExplosion(long aExplosionPower) {
         float tStrength = aExplosionPower < V[0] ? 1.0F : aExplosionPower < V[1] ? 2.0F : aExplosionPower < V[2] ? 3.0F : aExplosionPower < V[3] ? 4.0F : aExplosionPower < V[4] ? 5.0F : aExplosionPower < V[4] * 2 ? 6.0F : aExplosionPower < V[5] ? 7.0F : aExplosionPower < V[6] ? 8.0F : aExplosionPower < V[7] ? 9.0F : 10.0F;
         int tX = getBaseMetaTileEntity().getXCoord(), tY = getBaseMetaTileEntity().getYCoord(), tZ = getBaseMetaTileEntity().getZCoord();
-        World tWorld = getBaseMetaTileEntity().getWorldObj();
+        World tWorld = getBaseMetaTileEntity().getworld();
         tWorld.setBlockToAir(new BlockPos(tX, tY, tZ));
         if (GregTech_API.sMachineExplosions)
             tWorld.createExplosion(null, tX + 0.5, tY + 0.5, tZ + 0.5, tStrength, true);
