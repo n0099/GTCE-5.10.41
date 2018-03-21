@@ -38,7 +38,7 @@ public class Behaviour_Lighter
 
     @Override
     public boolean onLeftClickEntity(GT_MetaBase_Item aItem, ItemStack aStack, EntityPlayer aPlayer, Entity aEntity, EnumHand hand) {
-        if ((aPlayer.world.isRemote) || (aStack.stackSize != 1)) {
+        if ((aPlayer.worldObj.isRemote) || (aStack.stackSize != 1)) {
             return false;
         }
         boolean rOutput = false;
@@ -46,7 +46,7 @@ public class Behaviour_Lighter
             prepare(aStack);
             long tFuelAmount = GT_Utility.ItemNBT.getLighterFuel(aStack);
             if (GT_Utility.areStacksEqual(aStack, this.mUsedLighter, true)) {
-                GT_Utility.sendSoundToPlayers(aPlayer.world, GregTech_API.sSoundList.get(6), 1.0F, 1.0F, MathHelper.floor(aEntity.posX), MathHelper.floor(aEntity.posY), MathHelper.floor(aEntity.posZ));
+                GT_Utility.sendSoundToPlayers(aPlayer.worldObj, GregTech_API.sSoundList.get(6), 1.0F, 1.0F, MathHelper.floor_double(aEntity.posX), MathHelper.floor_double(aEntity.posY), MathHelper.floor_double(aEntity.posZ));
                 ((EntityCreeper) aEntity).ignite();
                 if (!aPlayer.capabilities.isCreativeMode) {
                     tFuelAmount -= 1L;

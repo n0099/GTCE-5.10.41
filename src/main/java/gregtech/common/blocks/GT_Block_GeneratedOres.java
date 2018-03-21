@@ -2,6 +2,7 @@ package gregtech.common.blocks;
 
 import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
+import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.StoneTypes;
@@ -9,6 +10,7 @@ import gregtech.api.items.GT_Generic_Block;
 import gregtech.api.util.GT_LanguageManager;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
+import gregtech.common.GT_Proxy;
 import gregtech.common.render.RenderGeneratedOres;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -205,8 +207,8 @@ public class GT_Block_GeneratedOres extends GT_Generic_Block {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public TextureAtlasSprite getParticleSprite(IBlockAccess world, BlockPos aPos, EnumFacing side) {
-        return getStoneTypeSafe(world.getBlockState(aPos)).mIconContainer.getIcon();
+    public TextureAtlasSprite getParticleSprite(IBlockAccess worldObj, BlockPos aPos, EnumFacing side) {
+        return getStoneTypeSafe(worldObj.getBlockState(aPos)).mIconContainer.getIcon();
     }
 
     @Override

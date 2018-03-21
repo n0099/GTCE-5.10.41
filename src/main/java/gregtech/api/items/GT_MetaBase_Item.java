@@ -6,6 +6,7 @@ import gregtech.api.util.GT_LanguageManager;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_Utility;
 import ic2.api.item.ElectricItem;
+import ic2.api.item.IElectricItem;
 import ic2.api.item.IElectricItemManager;
 import ic2.api.item.ISpecialElectricItem;
 import net.minecraft.dispenser.IBlockSource;
@@ -15,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -297,7 +299,7 @@ public abstract class GT_MetaBase_Item extends GT_Generic_Item implements ISpeci
 
     @Override
     public final void chargeFromArmor(ItemStack aStack, EntityLivingBase aPlayer) {
-        if (aPlayer == null || aPlayer.world.isRemote) return;
+        if (aPlayer == null || aPlayer.worldObj.isRemote) return;
         for (EntityEquipmentSlot i : EntityEquipmentSlot.values()) {
             ItemStack tArmor = aPlayer.getItemStackFromSlot(i);
             if (GT_ModHandler.isElectricItem(tArmor)) {

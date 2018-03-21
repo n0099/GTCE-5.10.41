@@ -1,5 +1,6 @@
 package gregtech.api.metatileentity;
 
+import net.minecraft.client.renderer.EnumFaceDirection;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -17,11 +18,14 @@ import gregtech.api.util.GT_Config;
 import gregtech.api.util.GT_LanguageManager;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_Utility;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -89,7 +93,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity {
 
         if (GT.isClientSide()) {
             ItemStack tStack = new ItemStack(GregTech_API.sBlockMachines, 1, aID);
-            tStack.getItem().addInformation(tStack, null, new ArrayList<>(), true);
+            tStack.getItem().addInformation(tStack, null, new ArrayList<String>(), true);
         }
     }
 
@@ -624,7 +628,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity {
 
     @Override
     public int[] getSlotsForFace(EnumFacing aSide) {
-        ArrayList<Integer> tList = new ArrayList<>();
+        ArrayList<Integer> tList = new ArrayList<Integer>();
         IGregTechTileEntity tTileEntity = getBaseMetaTileEntity();
         boolean tSkip = tTileEntity.getCoverBehaviorAtSide((byte) aSide.getIndex()).letsItemsIn((byte) aSide.getIndex(), tTileEntity.getCoverIDAtSide((byte) aSide.getIndex()), tTileEntity.getCoverDataAtSide((byte) aSide.getIndex()), -2, tTileEntity) || tTileEntity.getCoverBehaviorAtSide((byte) aSide.getIndex()).letsItemsOut((byte) aSide.getIndex(), tTileEntity.getCoverIDAtSide((byte) aSide.getIndex()), tTileEntity.getCoverDataAtSide((byte) aSide.getIndex()), -2, tTileEntity);
         for (int i = 0; i < getSizeInventory(); i++)
@@ -717,7 +721,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity {
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer entityplayer) {
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
         return false;
     }
 
@@ -760,7 +764,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity {
     public void doExplosion(long aExplosionPower) {
         float tStrength = aExplosionPower < V[0] ? 1.0F : aExplosionPower < V[1] ? 2.0F : aExplosionPower < V[2] ? 3.0F : aExplosionPower < V[3] ? 4.0F : aExplosionPower < V[4] ? 5.0F : aExplosionPower < V[4] * 2 ? 6.0F : aExplosionPower < V[5] ? 7.0F : aExplosionPower < V[6] ? 8.0F : aExplosionPower < V[7] ? 9.0F : 10.0F;
         int tX = getBaseMetaTileEntity().getXCoord(), tY = getBaseMetaTileEntity().getYCoord(), tZ = getBaseMetaTileEntity().getZCoord();
-        World tWorld = getBaseMetaTileEntity().getworld();
+        World tWorld = getBaseMetaTileEntity().getWorldObj();
         GT_Utility.sendSoundToPlayers(tWorld, GregTech_API.sSoundList.get(209), 1.0F, -1, tX, tY, tZ);
         tWorld.setBlockToAir(new BlockPos(tX, tY, tZ));
         if (GregTech_API.sMachineExplosions)

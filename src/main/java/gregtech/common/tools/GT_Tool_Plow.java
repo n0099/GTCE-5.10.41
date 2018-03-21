@@ -2,9 +2,11 @@ package gregtech.common.tools;
 
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.items.GT_MetaGenerated_Tool;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -45,7 +47,7 @@ public class GT_Tool_Plow extends GT_Tool {
                 for (int j = -1; j < 2; j++) {
                     for (int k = -1; k < 2; k++) {
                         BlockPos block = pos.add(i, j, k);
-                        IBlockState blockState = aPlayer.world.getBlockState(block);
+                        IBlockState blockState = aPlayer.worldObj.getBlockState(block);
                         if (((i != 0) || (j != 0) || (k != 0)) &&
                                 aStack.getStrVsBlock(blockState) > 0.0F &&
                                 ((EntityPlayerMP) aPlayer).interactionManager.tryHarvestBlock(block)) {

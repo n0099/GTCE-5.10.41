@@ -7,5 +7,5 @@ public interface IDescribable {
     /**
      * The Tooltip Text
      */
-    String[] getDescription();
+    public String[] getDescription();
 }

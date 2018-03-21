@@ -1,6 +1,7 @@
 package gregtech.api.interfaces;
 
 import gregtech.api.items.GT_MetaGenerated_Tool;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -22,102 +23,102 @@ public interface IToolStats {
     /**
      * Called when aPlayer crafts this Tool
      */
-    void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer);
+    public void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer);
 
     /**
      * Called when this gets added to a Tool Item
      */
-    void onStatsAddedToTool(GT_MetaGenerated_Tool aItem, int aID);
+    public void onStatsAddedToTool(GT_MetaGenerated_Tool aItem, int aID);
 
     /**
      * @return Damage the Tool receives when breaking a Block. 100 is one Damage Point (or 100 EU).
      */
-    int getToolDamagePerBlockBreak();
+    public int getToolDamagePerBlockBreak();
 
     /**
      * @return Damage the Tool receives when converting the drops of a Block. 100 is one Damage Point (or 100 EU).
      */
-    int getToolDamagePerDropConversion();
+    public int getToolDamagePerDropConversion();
 
     /**
      * @return Damage the Tool receives when being used as Container Item. 100 is one use, however it is usually 8 times more than normal.
      */
-    int getToolDamagePerContainerCraft();
+    public int getToolDamagePerContainerCraft();
 
     /**
      * @return Damage the Tool receives when being used as Weapon, 200 is the normal Value, 100 for actual Weapons.
      */
-    int getToolDamagePerEntityAttack();
+    public int getToolDamagePerEntityAttack();
 
     /**
      * @return Basic Quality of the Tool, 0 is normal. If increased, it will increase the general quality of all Tools of this Type. Decreasing is also possible.
      */
-    int getBaseQuality();
+    public int getBaseQuality();
 
     /**
      * @return The Damage Bonus for this Type of Tool against Mobs. 1.0F is normal punch.
      */
-    float getBaseDamage();
+    public float getBaseDamage();
 
     /**
      * @return This gets the Hurt Resistance time for Entities getting hit. (always does 1 as minimum)
      */
-    int getHurtResistanceTime(int aOriginalHurtResistance, Entity aEntity);
+    public int getHurtResistanceTime(int aOriginalHurtResistance, Entity aEntity);
 
     /**
      * @return This is a multiplier for the Tool Speed. 1.0F = no special Speed.
      */
-    float getSpeedMultiplier();
+    public float getSpeedMultiplier();
 
     /**
      * @return This is a multiplier for the Tool Speed. 1.0F = no special Durability.
      */
-    float getMaxDurabilityMultiplier();
+    public float getMaxDurabilityMultiplier();
 
-    DamageSource getDamageSource(EntityLivingBase aPlayer, Entity aEntity);
+    public DamageSource getDamageSource(EntityLivingBase aPlayer, Entity aEntity);
 
-    String getMiningSound();
+    public String getMiningSound();
 
-    String getCraftingSound();
+    public String getCraftingSound();
 
-    String getEntityHitSound();
+    public String getEntityHitSound();
 
-    String getBreakingSound();
+    public String getBreakingSound();
 
-    Enchantment[] getEnchantments(ItemStack aStack);
+    public Enchantment[] getEnchantments(ItemStack aStack);
 
-    int[] getEnchantmentLevels(ItemStack aStack);
+    public int[] getEnchantmentLevels(ItemStack aStack);
 
     /**
      * @return If this Tool can be used as an RC Crowbar.
      */
-    boolean isCrowbar();
+    public boolean isCrowbar();
 
     /**
      * @return If this Tool can be used as an FR Grafter.
      */
-    boolean isGrafter();
+    public boolean isGrafter();
 
-    boolean isChainsaw();
+    public boolean isChainsaw();
     /**
      * @return If this Tool can be used as an BC Wrench.
      */
-    boolean isWrench();
+    public boolean isWrench();
     
     /**
      * @return If this Tool can be used as Weapon i.e. if that is the main purpose.
      */
-    boolean isWeapon();
+    public boolean isWeapon();
 
     /**
      * @return If this Tool is a Ranged Weapon. Return false at isWeapon unless you have a Blade attached to your Bow/Gun or something
      */
-    boolean isRangedWeapon();
+    public boolean isRangedWeapon();
 
     /**
      * @return If this Tool can be used as Weapon i.e. if that is the main purpose.
      */
-    boolean isMiningTool();
+    public boolean isMiningTool();
 
     /**
      * aBlock.getHarvestTool(aMetaData) can return the following Values for example.
@@ -125,31 +126,31 @@ public interface IToolStats {
      *
      * @return If this is a minable Block. Tool Quality checks (like Diamond Tier or something) are separate from this check.
      */
-    boolean isMinableBlock(IBlockState aBlock);
+    public boolean isMinableBlock(IBlockState aBlock);
 
     /**
      * This lets you modify the Drop List, when this type of Tool has been used.
      *
      * @return the Amount of modified Items.
      */
-    int convertBlockDrops(List<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, IBlockState aBlock, BlockPos blockPos, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent);
+    public int convertBlockDrops(List<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, IBlockState aBlock, BlockPos blockPos, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent);
 
     /**
      * @return Returns a broken Version of the Item.
      */
-    ItemStack getBrokenItem(ItemStack aStack);
+    public ItemStack getBrokenItem(ItemStack aStack);
 
     /**
      * @return the Damage actually done to the Mob.
      */
-    float getNormalDamageAgainstEntity(float aOriginalDamage, Entity aEntity, ItemStack aStack, EntityPlayer aPlayer);
+    public float getNormalDamageAgainstEntity(float aOriginalDamage, Entity aEntity, ItemStack aStack, EntityPlayer aPlayer);
 
     /**
      * @return the Damage actually done to the Mob.
      */
-    float getMagicDamageAgainstEntity(float aOriginalDamage, Entity aEntity, ItemStack aStack, EntityPlayer aPlayer);
+    public float getMagicDamageAgainstEntity(float aOriginalDamage, Entity aEntity, ItemStack aStack, EntityPlayer aPlayer);
 
-    IIconContainer getIcon(boolean aIsToolHead, ItemStack aStack);
+    public IIconContainer getIcon(boolean aIsToolHead, ItemStack aStack);
 
-    short[] getRGBa(boolean aIsToolHead, ItemStack aStack);
+    public short[] getRGBa(boolean aIsToolHead, ItemStack aStack);
 }

@@ -1,15 +1,21 @@
 package gregtech.common.items.armor;
 
+import gregtech.api.util.GT_Utility;
+
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nullable;
 
 public class InventoryArmor implements IInventory {
 
@@ -128,7 +134,7 @@ public class InventoryArmor implements IInventory {
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer p_70300_1_) {
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
         return true;
     }
 

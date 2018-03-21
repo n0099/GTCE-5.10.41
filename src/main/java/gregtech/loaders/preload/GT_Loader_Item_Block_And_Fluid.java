@@ -12,6 +12,7 @@ import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
 import gregtech.common.blocks.*;
+import gregtech.common.blocks.GT_Block_GeneratedOres;
 import gregtech.common.items.*;
 import gregtech.common.items.armor.ElectricModularArmor1;
 import gregtech.common.items.armor.ModularArmor_Item;

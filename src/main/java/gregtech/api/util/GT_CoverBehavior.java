@@ -2,6 +2,8 @@ package gregtech.api.util;
 
 import gregtech.api.GregTech_API;
 import gregtech.api.interfaces.tileentity.ICoverable;
+import gregtech.api.objects.GT_Cover_Default;
+import gregtech.api.objects.GT_Cover_None;
 import gregtech.api.objects.GT_ItemStack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

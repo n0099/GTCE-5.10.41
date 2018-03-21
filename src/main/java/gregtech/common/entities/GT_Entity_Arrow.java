@@ -27,7 +27,7 @@ public class GT_Entity_Arrow extends EntityArrow {
     /* TODO
     public void onUpdate() {
         onEntityUpdate();
-        if ((this.mArrow == null) && (!this.world.isRemote)) {
+        if ((this.mArrow == null) && (!this.worldObj.isRemote)) {
             setDead();
             return;
         }
@@ -40,10 +40,10 @@ public class GT_Entity_Arrow extends EntityArrow {
         if (this.mTicksAlive++ == 3000) {
             setDead();
         }
-        Block tBlock = this.world.getBlock(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
+        Block tBlock = this.worldObj.getBlock(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
         if (tBlock.getMaterial() != Material.air) {
-            tBlock.setBlockBoundsBasedOnState(this.world, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
-            AxisAlignedBB axisalignedbb = tBlock.getCollisionBoundingBoxFromPool(this.world, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
+            tBlock.setBlockBoundsBasedOnState(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
+            AxisAlignedBB axisalignedbb = tBlock.getCollisionBoundingBoxFromPool(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
             if ((axisalignedbb != null) && (axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))) {
                 this.inGround = true;
             }
@@ -52,7 +52,7 @@ public class GT_Entity_Arrow extends EntityArrow {
             this.arrowShake -= 1;
         }
         if (this.inGround) {
-            int j = this.world.getBlockMetadata(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
+            int j = this.worldObj.getBlockMetadata(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
             if ((tBlock != this.mHitBlock) || (j != this.mHitBlockMeta)) {
                 this.inGround = false;
                 this.motionX *= this.rand.nextFloat() * 0.2F;
@@ -65,14 +65,14 @@ public class GT_Entity_Arrow extends EntityArrow {
             this.ticksInAir += 1;
             Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
             Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-            MovingObjectPosition tVector = this.world.func_147447_a(vec31, vec3, false, true, false);
+            MovingObjectPosition tVector = this.worldObj.func_147447_a(vec31, vec3, false, true, false);
             vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
             vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             if (tVector != null) {
                 vec3 = Vec3.createVectorHelper(tVector.hitVec.xCoord, tVector.hitVec.yCoord, tVector.hitVec.zCoord);
             }
             Entity tHitEntity = null;
-            List tAllPotentiallyHitEntities = this.world.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+            List tAllPotentiallyHitEntities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double tLargestDistance = 1.7976931348623157E+308D;
             for (int i = 0; i < tAllPotentiallyHitEntities.size(); i++) {
                 Entity entity1 = (Entity) tAllPotentiallyHitEntities.get(i);
@@ -123,8 +123,8 @@ public class GT_Entity_Arrow extends EntityArrow {
                         }
                         if ((!(tHitEntity instanceof EntityPlayer)) && (EnchantmentHelper.getEnchantmentLevel(Enchantment.looting.effectId, this.mArrow) > 0)) {
                             EntityPlayer tPlayer = null;
-                            if ((this.world instanceof WorldServer)) {
-                                tPlayer = FakePlayerFactory.get((WorldServer) this.world, new GameProfile(new UUID(0L, 0L), (tShootingEntity instanceof EntityLivingBase) ? ((EntityLivingBase) tShootingEntity).getCommandSenderName() : "Arrow"));
+                            if ((this.worldObj instanceof WorldServer)) {
+                                tPlayer = FakePlayerFactory.get((WorldServer) this.worldObj, new GameProfile(new UUID(0L, 0L), (tShootingEntity instanceof EntityLivingBase) ? ((EntityLivingBase) tShootingEntity).getCommandSenderName() : "Arrow"));
                             }
                             if (tPlayer != null) {
                                 tPlayer.inventory.currentItem = 0;
@@ -143,7 +143,7 @@ public class GT_Entity_Arrow extends EntityArrow {
                                     ((EntityCreeper) tVector.entityHit).func_146079_cb();
                                 }
                                 EntityLivingBase tHitLivingEntity = (EntityLivingBase) tVector.entityHit;
-                                if (!this.world.isRemote) {
+                                if (!this.worldObj.isRemote) {
                                     tHitLivingEntity.setArrowCountInEntity(tHitLivingEntity.getArrowCountInEntity() + 1);
                                 }
                                 if (tKnockback > 0) {
@@ -181,8 +181,8 @@ public class GT_Entity_Arrow extends EntityArrow {
                     this.mHitBlockX = tVector.blockX;
                     this.mHitBlockY = tVector.blockY;
                     this.mHitBlockZ = tVector.blockZ;
-                    this.mHitBlock = this.world.getBlock(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
-                    this.mHitBlockMeta = this.world.getBlockMetadata(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
+                    this.mHitBlock = this.worldObj.getBlock(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
+                    this.mHitBlockMeta = this.worldObj.getBlockMetadata(this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ);
                     this.motionX = ((float) (tVector.hitVec.xCoord - this.posX));
                     this.motionY = ((float) (tVector.hitVec.yCoord - this.posY));
                     this.motionZ = ((float) (tVector.hitVec.zCoord - this.posZ));
@@ -195,10 +195,10 @@ public class GT_Entity_Arrow extends EntityArrow {
                     this.arrowShake = 7;
                     setIsCritical(false);
                     if (this.mHitBlock.getMaterial() != Material.air) {
-                        this.mHitBlock.onEntityCollidedWithBlock(this.world, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ, this);
+                        this.mHitBlock.onEntityCollidedWithBlock(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ, this);
                     }
-                    if ((!this.world.isRemote) && (EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, this.mArrow) > 2)) {
-                        GT_Utility.setCoordsOnFire(this.world, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ, true);
+                    if ((!this.worldObj.isRemote) && (EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, this.mArrow) > 2)) {
+                        GT_Utility.setCoordsOnFire(this.worldObj, this.mHitBlockX, this.mHitBlockY, this.mHitBlockZ, true);
                     }
                     if (breaksOnImpact()) {
                         setDead();
@@ -207,7 +207,7 @@ public class GT_Entity_Arrow extends EntityArrow {
             }
             if (getIsCritical()) {
                 for (int i = 0; i < 4; i++) {
-                    this.world.spawnParticle("crit", this.posX + this.motionX * i / 4.0D, this.posY + this.motionY * i / 4.0D, this.posZ + this.motionZ * i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
+                    this.worldObj.spawnParticle("crit", this.posX + this.motionX * i / 4.0D, this.posY + this.motionY * i / 4.0D, this.posZ + this.motionZ * i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
                 }
             }
             this.posX += this.motionX;
@@ -231,7 +231,7 @@ public class GT_Entity_Arrow extends EntityArrow {
             float tFrictionMultiplier = 0.99F;
             if (isInWater()) {
                 for (int l = 0; l < 4; l++) {
-                    this.world.spawnParticle("bubble", this.posX - this.motionX * 0.25D, this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX, this.motionY, this.motionZ);
+                    this.worldObj.spawnParticle("bubble", this.posX - this.motionX * 0.25D, this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX, this.motionY, this.motionZ);
                 }
                 tFrictionMultiplier = 0.8F;
             }

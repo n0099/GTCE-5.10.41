@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import scala.tools.nsc.symtab.SymbolLoadersStats;
 
 public class GT_MetaTileEntity_Scanner
         extends GT_MetaTileEntity_BasicMachine {
@@ -203,7 +204,7 @@ public class GT_MetaTileEntity_Scanner
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
         if (mProgresstime >= (mMaxProgresstime - 1)) {
             if ((this.mOutputItems[0] != null) && (this.mOutputItems[0].getUnlocalizedName().equals("gt.metaitem.01.32707"))) {
-                GT_Mod.instance.achievements.issueAchievement(aBaseMetaTileEntity.getworld().getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()), "scanning");
+                GT_Mod.instance.achievements.issueAchievement(aBaseMetaTileEntity.getWorldObj().getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()), "scanning");
             }
         }
         super.onPostTick(aBaseMetaTileEntity, aTick);
@@ -225,7 +226,7 @@ public class GT_MetaTileEntity_Scanner
     public void startSoundLoop(byte aIndex, double aX, double aY, double aZ) {
         super.startSoundLoop(aIndex, aX, aY, aZ);
         if (aIndex == 1) {
-            GT_Utility.doSoundAtClient((String) GregTech_API.sSoundList.get(212), 10, 1.0F, aX, aY, aZ);
+            GT_Utility.doSoundAtClient((String) GregTech_API.sSoundList.get(Integer.valueOf(212)), 10, 1.0F, aX, aY, aZ);
         }
     }
 

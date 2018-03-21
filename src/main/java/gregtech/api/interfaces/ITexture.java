@@ -11,24 +11,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public interface ITexture {
 
     @SideOnly(Side.CLIENT)
-    void renderXPos(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
+    public void renderXPos(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
 
     @SideOnly(Side.CLIENT)
-    void renderXNeg(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
+    public void renderXNeg(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
 
     @SideOnly(Side.CLIENT)
-    void renderYPos(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
+    public void renderYPos(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
 
     @SideOnly(Side.CLIENT)
-    void renderYNeg(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
+    public void renderYNeg(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
 
     @SideOnly(Side.CLIENT)
-    void renderZPos(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
+    public void renderZPos(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
 
     @SideOnly(Side.CLIENT)
-    void renderZNeg(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
+    public void renderZNeg(IBlockAccess aWorld, RenderBlocks aRenderer, IBlockState aState, BlockPos aPos, boolean aFullBlock, boolean aItem, CCRenderState ccrs);
 
-    boolean isValidTexture();
+    public boolean isValidTexture();
 
     static int color(short[] mRGBa, boolean mAllowAlpha) {
         int r = (int) (mRGBa[0]);

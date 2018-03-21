@@ -26,7 +26,7 @@ public class Behaviour_SensorKit
     public boolean onItemUseFirst(GT_MetaBase_Item aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, BlockPos pos, EnumFacing aSide, float hitX, float hitY, float hitZ, EnumHand hand) {
         if ((aPlayer instanceof EntityPlayerMP)) {
             TileEntity tTileEntity = aWorld.getTileEntity(pos);
-            if (((tTileEntity instanceof IInventory)) && (!((IInventory) tTileEntity).isUsableByPlayer(aPlayer))) {
+            if (((tTileEntity instanceof IInventory)) && (!((IInventory) tTileEntity).isUseableByPlayer(aPlayer))) {
                 return false;
             }
             if (((tTileEntity instanceof IGregTechDeviceInformation)) && (((IGregTechDeviceInformation) tTileEntity).isGivingInformation())) {

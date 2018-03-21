@@ -3,11 +3,11 @@ package gregtech.loaders.load;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.*;
 import gregtech.api.items.GT_Generic_Item;
+import gregtech.api.items.GT_MetaBase_Item;
 import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
-import gregtech.common.tools.GT_Tool_Scoop;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -53,9 +53,10 @@ public class GT_ItemIterator
 
         GT_Log.out.println("GT_Mod: Scanning ItemList.");
 
-        for (Item aREGISTRY : Item.REGISTRY) {
+        Iterator<Item> tIterator = Item.REGISTRY.iterator();
+        while (tIterator.hasNext()) {
             Object tObject;
-            if (((tObject = aREGISTRY) instanceof Item) && (!(tObject instanceof GT_Generic_Item))) {
+            if (((tObject = tIterator.next()) instanceof Item) && (!(tObject instanceof GT_Generic_Item))) {
                 Item tItem = (Item) tObject;
                 String tName;
                 if ((tName = tItem.getUnlocalizedName()) != null) {
@@ -89,7 +90,7 @@ public class GT_ItemIterator
                     if (tBlock != null) {
                         if (tName.endsWith("beehives")) {
                             tBlock.setHarvestLevel("scoop", 0);
-                            GT_Tool_Scoop.sBeeHiveMaterial = tBlock.getMaterial(tBlock.getDefaultState());
+                            gregtech.common.tools.GT_Tool_Scoop.sBeeHiveMaterial = tBlock.getMaterial(tBlock.getDefaultState());
                         }
                     }
                     if (((tItem instanceof ItemFood)) && (tItem != ItemList.IC2_Food_Can_Filled.getItem()) && (tItem != ItemList.IC2_Food_Can_Spoiled.getItem())) {
@@ -185,7 +186,7 @@ public class GT_ItemIterator
                         GT_OreDictUnificator.registerOre(OrePrefixes.stone, Materials.Basalt, new ItemStack(tItem, 1, 5));
                         GT_OreDictUnificator.registerOre(OrePrefixes.stone, Materials.Basalt, new ItemStack(tItem, 1, 6));
                     }
-                    if (/**(tName.equals("tile.sedimentaryStone")) ||**/((tName.equals("tile.igneousStone")) || (tName.equals("tile.igneousStoneBrick")) || (tName.equals("tile.igneousCobblestone")))) {
+                    if (/**(tName.equals("tile.sedimentaryStone")) ||**/ ((tName.equals("tile.igneousStone")) || (tName.equals("tile.igneousStoneBrick")) || (tName.equals("tile.igneousCobblestone")))) {
                         GT_OreDictUnificator.registerOre(OrePrefixes.stone, Materials.GraniteRed, new ItemStack(tItem, 1, 0));
                         GT_OreDictUnificator.registerOre(OrePrefixes.stone, Materials.GraniteBlack, new ItemStack(tItem, 1, 1));
                         GT_OreDictUnificator.registerOre(OrePrefixes.stone, Materials.Rhyolite, new ItemStack(tItem, 1, 2));

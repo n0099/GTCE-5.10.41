@@ -790,15 +790,15 @@ public class GT_MetaGenerated_Item_01 extends GT_MetaGenerated_Item_X32 {
 
         public boolean onEntityItemUpdate(EntityItem aItemEntity) {
                 int aDamage = aItemEntity.getEntityItem().getItemDamage();
-                if ((aDamage < 32000) && (aDamage >= 0) && (!aItemEntity.world.isRemote)) {
+                if ((aDamage < 32000) && (aDamage >= 0) && (!aItemEntity.worldObj.isRemote)) {
                         Materials aMaterial = GregTech_API.sGeneratedMaterials[(aDamage % 1000)];
                         if ((aMaterial != null) && (aMaterial != Materials.Empty) && (aMaterial != Materials._NULL)) {
-                                int tX = MathHelper.floor(aItemEntity.posX);
-                                int tY = MathHelper.floor(aItemEntity.posY);
-                                int tZ = MathHelper.floor(aItemEntity.posZ);
+                                int tX = MathHelper.floor_double(aItemEntity.posX);
+                                int tY = MathHelper.floor_double(aItemEntity.posY);
+                                int tZ = MathHelper.floor_double(aItemEntity.posZ);
                                 OrePrefixes aPrefix = this.mGeneratedPrefixList[(aDamage / 1000)];
                                 if (aPrefix == OrePrefixes.dustImpure || aPrefix == OrePrefixes.dustPure || aPrefix == OrePrefixes.crushed || aPrefix == OrePrefixes.dust) {
-                                        IBlockState tBlock = aItemEntity.world.getBlockState(new BlockPos(tX, tY, tZ));
+                                        IBlockState tBlock = aItemEntity.worldObj.getBlockState(new BlockPos(tX, tY, tZ));
                                         if(tBlock.getBlock() == Blocks.CAULDRON) {
                                                 int waterLevel = tBlock.getValue(BlockCauldron.LEVEL);
                                                 if(waterLevel > 0) {
@@ -809,7 +809,7 @@ public class GT_MetaGenerated_Item_01 extends GT_MetaGenerated_Item_X32 {
                                                         } else {
                                                                 aItemEntity.setEntityItemStack(GT_OreDictUnificator.get(OrePrefixes.dust, aMaterial, aItemEntity.getEntityItem().stackSize));
                                                         }
-                                                        aItemEntity.world.setBlockState(new BlockPos(tX, tY, tZ), tBlock.withProperty(BlockCauldron.LEVEL, waterLevel - 1));
+                                                        aItemEntity.worldObj.setBlockState(new BlockPos(tX, tY, tZ), tBlock.withProperty(BlockCauldron.LEVEL, waterLevel - 1));
                                                         return true;
                                                 }
                                         }

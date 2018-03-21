@@ -1,5 +1,6 @@
 package gregtech.loaders.postload;
 
+import gregtech.GT_Mod;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;

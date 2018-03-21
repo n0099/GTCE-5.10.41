@@ -81,7 +81,7 @@ public class GT_MetaTileEntity_OilDrill extends GT_MetaTileEntity_MultiBlockBase
                 }
             }
         }
-        FluidStack tFluid = GT_Utility.getUndergroundOil(getBaseMetaTileEntity().getworld(), getBaseMetaTileEntity().getXCoord(), getBaseMetaTileEntity().getZCoord());
+        FluidStack tFluid = GT_Utility.getUndergroundOil(getBaseMetaTileEntity().getWorldObj(), getBaseMetaTileEntity().getXCoord(), getBaseMetaTileEntity().getZCoord());
         if (tFluid == null) {
             return false;
         }
@@ -140,12 +140,12 @@ public class GT_MetaTileEntity_OilDrill extends GT_MetaTileEntity_MultiBlockBase
         if (getBaseMetaTileEntity().getBlock(getBaseMetaTileEntity().getXCoord() + xDir, yHead - 1, getBaseMetaTileEntity().getZCoord() + zDir) == Blocks.BEDROCK) {
             return false;
         }
-        if (!(getBaseMetaTileEntity().getworld().setBlockState(
+        if (!(getBaseMetaTileEntity().getWorldObj().setBlockState(
                 new BlockPos(getBaseMetaTileEntity().getXCoord() + xDir, yHead - 1, getBaseMetaTileEntity().getZCoord() + zDir), mining_pipe_tip))) {
             return false;
         }
         if (yHead != getBaseMetaTileEntity().getYCoord()) {
-            getBaseMetaTileEntity().getworld().setBlockState(
+            getBaseMetaTileEntity().getWorldObj().setBlockState(
                 new BlockPos(getBaseMetaTileEntity().getXCoord() + xDir, yHead, getBaseMetaTileEntity().getZCoord() + zDir), mining_pipe);
         }
         getBaseMetaTileEntity().decrStackSize(1, 1);
@@ -168,7 +168,7 @@ public class GT_MetaTileEntity_OilDrill extends GT_MetaTileEntity_MultiBlockBase
                 && this.mInventory[1] != null
                 && this.mInventory[1].stackSize > 0
                 && GT_Utility.areStacksEqual(this.mInventory[1], mining_pipe_item)) {
-            getBaseMetaTileEntity().getworld().setBlockState(pos, mining_pipe_tip);
+            getBaseMetaTileEntity().getWorldObj().setBlockState(pos, mining_pipe_tip);
             getBaseMetaTileEntity().decrStackSize(0, 1);
         }
         return pos.getY();

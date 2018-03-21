@@ -1,7 +1,13 @@
 package gregtech.loaders.postload;
 
 import gregtech.GT_Mod;
+import gregtech.api.util.GT_Utility;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemPickaxe;
+
+import java.util.Set;
 
 public class GT_BlockResistanceLoader
         implements Runnable {

@@ -1,6 +1,8 @@
 package gregtech.common.tileentities.machines.basic;
 
 
+import java.util.Iterator;
+
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Textures;
 import gregtech.api.gui.GT_Container_1by1;
@@ -58,7 +60,7 @@ public class GT_MetaTileEntity_CuringOven
                     NBTTagCompound aNBT = tStack.getTagCompound();
                     if (aNBT != null) {
                 	int tHeat = 300;
-                	long tWorldTime = getBaseMetaTileEntity().getworld().getTotalWorldTime();
+                	long tWorldTime = getBaseMetaTileEntity().getWorldObj().getTotalWorldTime();
                         aNBT = aNBT.getCompoundTag("GT.ToolStats");
                         if (aNBT != null&&aNBT.hasKey("Heat")) {
                         	tHeat = aNBT.getInteger("Heat");

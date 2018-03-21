@@ -25,27 +25,27 @@ public interface IGregTechTileEntity extends ITexturedTileEntity, IGearEnergyTil
     /**
      * gets the Error displayed on the GUI
      */
-    int getErrorDisplayID();
+    public int getErrorDisplayID();
 
     /**
      * sets the Error displayed on the GUI
      */
-    void setErrorDisplayID(int aErrorID);
+    public void setErrorDisplayID(int aErrorID);
 
     /**
      * @return the MetaID of the Block or the MetaTileEntity ID.
      */
-    int getMetaTileID();
+    public int getMetaTileID();
 
     /**
      * Internal Usage only!
      */
-    int setMetaTileID(short aID);
+    public int setMetaTileID(short aID);
 
     /**
      * @return the MetaTileEntity which is belonging to this, or null if it doesnt has one.
      */
-    IMetaTileEntity getMetaTileEntity();
+    public IMetaTileEntity getMetaTileEntity();
 
     /**
      * Sets the MetaTileEntity.
@@ -54,44 +54,44 @@ public interface IGregTechTileEntity extends ITexturedTileEntity, IGearEnergyTil
      *
      * @param aMetaTileEntity
      */
-    void setMetaTileEntity(IMetaTileEntity aMetaTileEntity);
+    public void setMetaTileEntity(IMetaTileEntity aMetaTileEntity);
 
     /**
      * Causes a general Texture update.
      * <p/>
      * Only used Client Side to mark Blocks dirty.
      */
-    void issueTextureUpdate();
+    public void issueTextureUpdate();
 
     /**
      * Causes the Machine to send its initial Data, like Covers and its ID.
      */
-    void issueClientUpdate();
+    public void issueClientUpdate();
 
     /**
      * causes Explosion. Strength in Overload-EU
      */
-    void doExplosion(long aExplosionEU);
+    public void doExplosion(long aExplosionEU);
 
     /**
      * Sets the Block on Fire in all 6 Directions
      */
-    void setOnFire();
+    public void setOnFire();
 
     /**
      * Sets the Block to Fire
      */
-    void setToFire();
+    public void setToFire();
 
     /**
      * Sets the Owner of the Machine. Returns the set Name.
      */
-    String setOwnerName(String aName);
+    public String setOwnerName(String aName);
 
     /**
      * gets the Name of the Machines Owner or "Player" if not set.
      */
-    String getOwnerName();
+    public String getOwnerName();
 
     /**
      * Sets initial Values from NBT
@@ -99,30 +99,30 @@ public interface IGregTechTileEntity extends ITexturedTileEntity, IGearEnergyTil
      * @param aNBT is the NBTTag of readFromNBT
      * @param aID  is the MetaTileEntityID
      */
-    void setInitialValuesAsNBT(NBTTagCompound aNBT, short aID);
+    public void setInitialValuesAsNBT(NBTTagCompound aNBT, short aID);
 
     /**
      * Called when leftclicking the TileEntity
      */
-    void onLeftclick(EntityPlayer aPlayer);
+    public void onLeftclick(EntityPlayer aPlayer);
 
     /**
      * Called when rightclicking the TileEntity
      */
-    boolean onRightclick(EntityPlayer aPlayer, byte aSide, float xOff, float yOff, float zOff, EnumHand hand);
+    public boolean onRightclick(EntityPlayer aPlayer, byte aSide, float xOff, float yOff, float zOff, EnumHand hand);
 
-    float getBlastResistance(byte aSide);
+    public float getBlastResistance(byte aSide);
 
-    ArrayList<ItemStack> getDrops();
+    public ArrayList<ItemStack> getDrops();
 
     /**
      * 255 = 100%
      */
-    int getLightOpacity();
+    public int getLightOpacity();
 
-    void addCollisionBoxesToList(World aWorld, int aX, int aY, int aZ, AxisAlignedBB inputAABB, List<AxisAlignedBB> outputAABB, Entity collider);
+    public void addCollisionBoxesToList(World aWorld, int aX, int aY, int aZ, AxisAlignedBB inputAABB, List<AxisAlignedBB> outputAABB, Entity collider);
 
-    AxisAlignedBB getCollisionBoundingBoxFromPool(World aWorld, int aX, int aY, int aZ);
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World aWorld, int aX, int aY, int aZ);
 
-    void onEntityCollidedWithBlock(World aWorld, int aX, int aY, int aZ, Entity collider);
+    public void onEntityCollidedWithBlock(World aWorld, int aX, int aY, int aZ, Entity collider);
 }

@@ -5,35 +5,35 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public interface IItemContainer {
-    Item getItem();
+    public Item getItem();
 
-    Block getBlock();
+    public Block getBlock();
 
-    boolean isStackEqual(Object aStack);
+    public boolean isStackEqual(Object aStack);
 
-    boolean isStackEqual(Object aStack, boolean aWildcard, boolean aIgnoreNBT);
+    public boolean isStackEqual(Object aStack, boolean aWildcard, boolean aIgnoreNBT);
 
-    ItemStack get(long aAmount, Object... aReplacements);
+    public ItemStack get(long aAmount, Object... aReplacements);
 
-    ItemStack getWildcard(long aAmount, Object... aReplacements);
+    public ItemStack getWildcard(long aAmount, Object... aReplacements);
 
-    ItemStack getUndamaged(long aAmount, Object... aReplacements);
+    public ItemStack getUndamaged(long aAmount, Object... aReplacements);
 
-    ItemStack getAlmostBroken(long aAmount, Object... aReplacements);
+    public ItemStack getAlmostBroken(long aAmount, Object... aReplacements);
 
-    ItemStack getWithDamage(long aAmount, long aMetaValue, Object... aReplacements);
+    public ItemStack getWithDamage(long aAmount, long aMetaValue, Object... aReplacements);
 
-    IItemContainer set(Item aItem);
+    public IItemContainer set(Item aItem);
 
-    IItemContainer set(ItemStack aStack);
+    public IItemContainer set(ItemStack aStack);
 
-    IItemContainer registerOre(Object... aOreNames);
+    public IItemContainer registerOre(Object... aOreNames);
 
-    IItemContainer registerWildcardAsOre(Object... aOreNames);
+    public IItemContainer registerWildcardAsOre(Object... aOreNames);
 
-    ItemStack getWithCharge(long aAmount, int aEnergy, Object... aReplacements);
+    public ItemStack getWithCharge(long aAmount, int aEnergy, Object... aReplacements);
 
-    ItemStack getWithName(long aAmount, String aDisplayName, Object... aReplacements);
+    public ItemStack getWithName(long aAmount, String aDisplayName, Object... aReplacements);
 
-    boolean hasBeenSet();
+    public boolean hasBeenSet();
 }

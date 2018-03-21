@@ -42,13 +42,13 @@ public class GT_Tool_Sense extends GT_Tool {
     @Override
     public int convertBlockDrops(List<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, IBlockState aBlock, BlockPos pos, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent) {
         int rConversions = 0;
-        if (this.sIsHarvestingRightNow.get() == null && !aPlayer.world.isRemote) {
+        if (this.sIsHarvestingRightNow.get() == null && !aPlayer.worldObj.isRemote) {
             this.sIsHarvestingRightNow.set(this);
             for (int i = -2; i < 3; i++) {
                 for (int j = -2; j < 3; j++) {
                     for (int k = -2; k < 3; k++) {
                         BlockPos block = pos.add(i, j, k);
-                        IBlockState blockState = aPlayer.world.getBlockState(block);
+                        IBlockState blockState = aPlayer.worldObj.getBlockState(block);
                         if ((i != 0 || j != 0 || k != 0) && aStack.getStrVsBlock(blockState) > 0.0F &&
                                 ((EntityPlayerMP) aPlayer).interactionManager.tryHarvestBlock(block))
                             rConversions++;

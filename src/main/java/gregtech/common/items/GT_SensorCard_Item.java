@@ -39,7 +39,7 @@ public class GT_SensorCard_Item extends GT_Generic_Item {
 
     /*@Override
     public CardState update(TileEntity aPanel, ICardWrapper aCard, int aMaxRange) {
-        return update(aPanel.getworld(), aCard, aMaxRange);
+        return update(aPanel.getWorldObj(), aCard, aMaxRange);
     }
 
     @Override

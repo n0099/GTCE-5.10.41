@@ -10,12 +10,12 @@ public interface IMetaTileEntityItemPipe extends IMetaTileEntity {
     /**
      * @return if this Pipe can still be used.
      */
-    boolean pipeCapacityCheck();
+    public boolean pipeCapacityCheck();
 
     /**
      * @return if this Pipe can still be used.
      */
-    boolean incrementTransferCounter(int aIncrement);
+    public boolean incrementTransferCounter(int aIncrement);
 
     /**
      * Sends an ItemStack from aSender to the adjacent Blocks.
@@ -23,7 +23,7 @@ public interface IMetaTileEntityItemPipe extends IMetaTileEntity {
      * @param aSender the BaseMetaTileEntity sending the Stack.
      * @return if it was able to send something
      */
-    boolean sendItemStack(Object aSender);
+    public boolean sendItemStack(Object aSender);
 
     /**
      * Executes the Sending Code for inserting Stacks into the TileEntities.
@@ -32,19 +32,19 @@ public interface IMetaTileEntityItemPipe extends IMetaTileEntity {
      * @param aSide   the Side of the PIPE facing the TileEntity.
      * @return if this Side was allowed to Output into the Block.
      */
-    boolean insertItemStackIntoTileEntity(Object aSender, byte aSide);
+    public boolean insertItemStackIntoTileEntity(Object aSender, byte aSide);
 
     /**
      * Can be used to make flow control Pipes, like Redpowers Restriction Tubes.
      * Every normal Pipe returns a Value of 32768, so you can easily insert lower Numbers to set Routing priorities.
      * Negative Numbers to "suck" Items into a certain direction are also possible.
      */
-    int getStepSize();
+    public int getStepSize();
 
     /**
      * Utility for the Item Network
      */
-    class Util {
+    public static class Util {
         /**
          * @return a List of connected Item Pipes
          */

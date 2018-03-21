@@ -28,11 +28,16 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
@@ -43,6 +48,7 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -157,7 +163,7 @@ public abstract class GT_MetaGenerated_Tool extends GT_MetaBase_Item implements 
             mToolStats.put((short) (aID + 1), aToolStats);
             aToolStats.onStatsAddedToTool(this, aID);
             ItemStack rStack = new ItemStack(this, 1, aID);
-            List<TC_AspectStack> tAspects = new ArrayList<>();
+            List<TC_AspectStack> tAspects = new ArrayList<TC_AspectStack>();
             for (Object tOreDictNameOrAspect : aOreDictNamesAndAspects) {
                 if (tOreDictNameOrAspect instanceof TC_AspectStack)
                     ((TC_AspectStack) tOreDictNameOrAspect).addToAspectList(tAspects);
@@ -223,33 +229,33 @@ public abstract class GT_MetaGenerated_Tool extends GT_MetaBase_Item implements 
 
     @Override
     public boolean onBlockStartBreak(ItemStack aStack, BlockPos blockPos, EntityPlayer aPlayer) {
-        if(aPlayer.world.isRemote){
+        if(aPlayer.worldObj.isRemote){
             return false;
         }
         IToolStats tStats = getToolStats(aStack);
-        IBlockState aBlock = aPlayer.world.getBlockState(blockPos);
+        IBlockState aBlock = aPlayer.worldObj.getBlockState(blockPos);
         if (tStats.isChainsaw()&&(aBlock instanceof IShearable))
         {
             IShearable target = (IShearable)aBlock;
-            if ((target.isShearable(aStack, aPlayer.world, blockPos)))
+            if ((target.isShearable(aStack, aPlayer.worldObj, blockPos)))
             {
-                List<ItemStack> drops = target.onSheared(aStack, aPlayer.world, blockPos, EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("fortune"), aStack));
+                List<ItemStack> drops = target.onSheared(aStack, aPlayer.worldObj, blockPos, EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("fortune"), aStack));
                 for (ItemStack stack : drops)
                 {
                     float f = 0.7F;
                     double d = itemRand.nextFloat() * f + (1.0F - f) * 0.5D;
                     double d1 = itemRand.nextFloat() * f + (1.0F - f) * 0.5D;
                     double d2 = itemRand.nextFloat() * f + (1.0F - f) * 0.5D;
-                    EntityItem entityitem = new EntityItem(aPlayer.world,
+                    EntityItem entityitem = new EntityItem(aPlayer.worldObj,
                             blockPos.getX() + d,
                             blockPos.getY() + d1,
                             blockPos.getZ() + d2,
                             stack);
                     entityitem.setPickupDelay(10);
-                    aPlayer.world.spawnEntity(entityitem);
+                    aPlayer.worldObj.spawnEntityInWorld(entityitem);
                 }
                 //aPlayer.addStat(net.minecraft.stats.StatList.mine[Block.getIdFromBlock(aBlock.getBlock())], 1);
-                onBlockDestroyed(aStack, aPlayer.world, aBlock, blockPos, aPlayer);
+                onBlockDestroyed(aStack, aPlayer.worldObj, aBlock, blockPos, aPlayer);
             }
             return false;
         }
@@ -739,14 +745,14 @@ public abstract class GT_MetaGenerated_Tool extends GT_MetaBase_Item implements 
             case 7:
                 // Energy Bar
                 Long[] tStats = getElectricStats(stack);
-                if ((tStats != null) && (tStats[3] < 0L)) {
+                if ((tStats != null) && (tStats[3].longValue() < 0L)) {
                 long tCharge = getRealCharge(stack);
                     if (tCharge <= 0L) {
                         icon = gregtech.api.enums.Textures.ItemIcons.ENERGY_BAR[0];
-                    } else if (tCharge >= tStats[0]) {
+                    } else if (tCharge >= tStats[0].longValue()) {
                         icon = gregtech.api.enums.Textures.ItemIcons.ENERGY_BAR[8];
                     } else {
-                        icon = gregtech.api.enums.Textures.ItemIcons.ENERGY_BAR[(7 - (int) java.lang.Math.max(0L, java.lang.Math.min(6L, (tStats[0] - tCharge) * 7L / tStats[0])))];
+                        icon = gregtech.api.enums.Textures.ItemIcons.ENERGY_BAR[(7 - (int) java.lang.Math.max(0L, java.lang.Math.min(6L, (tStats[0].longValue() - tCharge) * 7L / tStats[0].longValue())))];
                     }
                 }
                 break;

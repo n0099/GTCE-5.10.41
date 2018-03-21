@@ -190,7 +190,7 @@ public class GT_MetaTileEntity_BronzeBlastFurnace extends MetaTileEntity {
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTimer) {
         if ((aBaseMetaTileEntity.isClientSide()) &&
                 (aBaseMetaTileEntity.isActive())) {
-            aBaseMetaTileEntity.getworld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, aBaseMetaTileEntity.getOffsetX(aBaseMetaTileEntity.getBackFacing(), 1) + (new XSTR()).nextFloat(), aBaseMetaTileEntity.getOffsetY(aBaseMetaTileEntity.getBackFacing(), 1), aBaseMetaTileEntity.getOffsetZ(aBaseMetaTileEntity.getBackFacing(), 1) + (new XSTR()).nextFloat(), 0.0D, 0.3D, 0.0D);
+            aBaseMetaTileEntity.getWorldObj().spawnParticle(EnumParticleTypes.SMOKE_LARGE, aBaseMetaTileEntity.getOffsetX(aBaseMetaTileEntity.getBackFacing(), 1) + (new XSTR()).nextFloat(), aBaseMetaTileEntity.getOffsetY(aBaseMetaTileEntity.getBackFacing(), 1), aBaseMetaTileEntity.getOffsetZ(aBaseMetaTileEntity.getBackFacing(), 1) + (new XSTR()).nextFloat(), 0.0D, 0.3D, 0.0D);
         }
         if (aBaseMetaTileEntity.isServerSide()) {
             if (this.mUpdate-- == 0) {
@@ -204,7 +204,7 @@ public class GT_MetaTileEntity_BronzeBlastFurnace extends MetaTileEntity {
                         this.mOutputItem2 = null;
                         this.mProgresstime = 0;
                         this.mMaxProgresstime = 0;
-                        GT_Mod.achievements.issueAchievement(aBaseMetaTileEntity.getworld().getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()), "steel");
+                        GT_Mod.achievements.issueAchievement(aBaseMetaTileEntity.getWorldObj().getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()), "steel");
                     }
                 } else if (aBaseMetaTileEntity.isAllowedToWork()) {
                     checkRecipe();

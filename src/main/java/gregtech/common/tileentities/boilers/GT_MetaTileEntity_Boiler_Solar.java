@@ -13,6 +13,8 @@ import gregtech.common.gui.GT_GUIContainer_Boiler;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidHandler;
 
 public class GT_MetaTileEntity_Boiler_Solar extends GT_MetaTileEntity_Boiler {
 
@@ -94,7 +96,7 @@ public class GT_MetaTileEntity_Boiler_Solar extends GT_MetaTileEntity_Boiler {
                 for (EnumFacing side : EnumFacing.VALUES) {
                     if (side.getIndex() != aBaseMetaTileEntity.getFrontFacing() && side != EnumFacing.DOWN) {
                         int drain = GT_Utility.fillFluidTank(
-                                aBaseMetaTileEntity.getworld(),
+                                aBaseMetaTileEntity.getWorldObj(),
                                 aBaseMetaTileEntity.getWorldPos(), side,
                                 getDrainableStack());
                         if (drain != 0) {
@@ -137,9 +139,9 @@ public class GT_MetaTileEntity_Boiler_Solar extends GT_MetaTileEntity_Boiler {
                 sendSound((byte) 1);
                 this.mSteam.amount = 12000;
             }
-            if ((this.mProcessingEnergy <= 0) && (aBaseMetaTileEntity.isAllowedToWork()) && (aTick % 256L == 0L) && (!aBaseMetaTileEntity.getworld().isThundering())) {
-                boolean bRain = aBaseMetaTileEntity.getworld().isRaining() && aBaseMetaTileEntity.getBiome().getRainfall() > 0.0F;
-                mProcessingEnergy += bRain && aBaseMetaTileEntity.getworld().getSkylightSubtracted() >= 4 || !aBaseMetaTileEntity.getSkyAtSide((byte) 1) ? 0 : !bRain && aBaseMetaTileEntity.getworld().isDaytime() ? 8 : 1;
+            if ((this.mProcessingEnergy <= 0) && (aBaseMetaTileEntity.isAllowedToWork()) && (aTick % 256L == 0L) && (!aBaseMetaTileEntity.getWorldObj().isThundering())) {
+                boolean bRain = aBaseMetaTileEntity.getWorldObj().isRaining() && aBaseMetaTileEntity.getBiome().getRainfall() > 0.0F;
+                mProcessingEnergy += bRain && aBaseMetaTileEntity.getWorldObj().getSkylightSubtracted() >= 4 || !aBaseMetaTileEntity.getSkyAtSide((byte) 1) ? 0 : !bRain && aBaseMetaTileEntity.getWorldObj().isDaytime() ? 8 : 1;
             }
             if ((this.mTemperature < 500) && (this.mProcessingEnergy > 0) && (aTick % 12L == 0L)) {
                 this.mProcessingEnergy -= 1;

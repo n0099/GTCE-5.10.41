@@ -2,8 +2,11 @@ package gregtech.api.util;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.appender.FileAppender;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.util.ArrayList;
 
 /**
  * NEVER INCLUDE THIS FILE IN YOUR MOD!!!

@@ -17,27 +17,27 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public interface IItemBehaviour<E extends Item> {
-    boolean onLeftClickEntity(E aItem, ItemStack aStack, EntityPlayer aPlayer, Entity aEntity, EnumHand hand);
+    public boolean onLeftClickEntity(E aItem, ItemStack aStack, EntityPlayer aPlayer, Entity aEntity, EnumHand hand);
 
-    boolean onItemUse(E aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, BlockPos blockPos, EnumFacing aSide, float hitX, float hitY, float hitZ, EnumHand hand);
+    public boolean onItemUse(E aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, BlockPos blockPos, EnumFacing aSide, float hitX, float hitY, float hitZ, EnumHand hand);
 
-    boolean onItemUseFirst(E aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, BlockPos blockPos, EnumFacing aSide, float hitX, float hitY, float hitZ, EnumHand hand);
+    public boolean onItemUseFirst(E aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, BlockPos blockPos, EnumFacing aSide, float hitX, float hitY, float hitZ, EnumHand hand);
 
-    ItemStack onItemRightClick(E aItem, ItemStack aStack, World aWorld, EntityPlayer aPlayer, EnumHand hand);
+    public ItemStack onItemRightClick(E aItem, ItemStack aStack, World aWorld, EntityPlayer aPlayer, EnumHand hand);
 
-    List<String> getAdditionalToolTips(E aItem, List<String> aList, ItemStack aStack);
+    public List<String> getAdditionalToolTips(E aItem, List<String> aList, ItemStack aStack);
 
-    void onUpdate(E aItem, ItemStack aStack, World aWorld, Entity aPlayer, int aTimer, boolean aIsInHand);
+    public void onUpdate(E aItem, ItemStack aStack, World aWorld, Entity aPlayer, int aTimer, boolean aIsInHand);
 
-    boolean isItemStackUsable(E aItem, ItemStack aStack);
+    public boolean isItemStackUsable(E aItem, ItemStack aStack);
 
-    boolean canDispense(E aItem, IBlockSource aSource, ItemStack aStack);
+    public boolean canDispense(E aItem, IBlockSource aSource, ItemStack aStack);
 
-    ItemStack onDispense(E aItem, IBlockSource aSource, ItemStack aStack);
+    public ItemStack onDispense(E aItem, IBlockSource aSource, ItemStack aStack);
 
-    boolean hasProjectile(GT_MetaBase_Item aItem, SubTag aProjectileType, ItemStack aStack);
+    public boolean hasProjectile(GT_MetaBase_Item aItem, SubTag aProjectileType, ItemStack aStack);
 
-    EntityArrow getProjectile(E aItem, SubTag aProjectileType, ItemStack aStack, World aWorld, double aX, double aY, double aZ);
+    public EntityArrow getProjectile(E aItem, SubTag aProjectileType, ItemStack aStack, World aWorld, double aX, double aY, double aZ);
 
-    EntityArrow getProjectile(E aItem, SubTag aProjectileType, ItemStack aStack, World aWorld, EntityLivingBase aEntity, float aSpeed);
+    public EntityArrow getProjectile(E aItem, SubTag aProjectileType, ItemStack aStack, World aWorld, EntityLivingBase aEntity, float aSpeed);
 }

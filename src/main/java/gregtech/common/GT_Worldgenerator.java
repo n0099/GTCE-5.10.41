@@ -158,12 +158,12 @@ public class GT_Worldgenerator implements IWorldGenerator {
                     double var26 = aRandom.nextDouble() * mSize / 16.0D;
                     double var28 = (MathHelper.sin(var19 * 3.141593F / mSize) + 1.0F) * var26 + 1.0D;
                     double var30 = (MathHelper.sin(var19 * 3.141593F / mSize) + 1.0F) * var26 + 1.0D;
-                    int tMinX = MathHelper.floor(var20 - var28 / 2.0D);
-                    int tMinY = MathHelper.floor(var22 - var30 / 2.0D);
-                    int tMinZ = MathHelper.floor(var24 - var28 / 2.0D);
-                    int tMaxX = MathHelper.floor(var20 + var28 / 2.0D);
-                    int tMaxY = MathHelper.floor(var22 + var30 / 2.0D);
-                    int tMaxZ = MathHelper.floor(var24 + var28 / 2.0D);
+                    int tMinX = MathHelper.floor_double(var20 - var28 / 2.0D);
+                    int tMinY = MathHelper.floor_double(var22 - var30 / 2.0D);
+                    int tMinZ = MathHelper.floor_double(var24 - var28 / 2.0D);
+                    int tMaxX = MathHelper.floor_double(var20 + var28 / 2.0D);
+                    int tMaxY = MathHelper.floor_double(var22 + var30 / 2.0D);
+                    int tMaxZ = MathHelper.floor_double(var24 + var28 / 2.0D);
                     for (int eX = tMinX; eX <= tMaxX; eX++) {
                         double var39 = (eX + 0.5D - var20) / (var28 / 2.0D);
                         if (var39 * var39 < 1.0D) {

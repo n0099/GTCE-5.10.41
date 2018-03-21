@@ -103,7 +103,7 @@ public class GT_EnergyArmor_Item extends ItemArmor implements ISpecialArmor {
     public void onArmorTick(World aWorld, EntityPlayer aPlayer, ItemStack aStack) {
         if (mSpecials == 0) return;
 
-        if (!aPlayer.world.isRemote && (mSpecials & 1) != 0) {
+        if (!aPlayer.worldObj.isRemote && (mSpecials & 1) != 0) {
             int var4 = aPlayer.getAir();
             if (GT_ModHandler.canUseElectricItem(aStack, 1000) && var4 < 50) {
                 aPlayer.setAir(var4 + 250);
@@ -111,7 +111,7 @@ public class GT_EnergyArmor_Item extends ItemArmor implements ISpecialArmor {
             }
         }
 
-        if (!aPlayer.world.isRemote && (mSpecials & 4) != 0) {
+        if (!aPlayer.worldObj.isRemote && (mSpecials & 4) != 0) {
             if (GT_ModHandler.canUseElectricItem(aStack, 50000) && aPlayer.getFoodStats().needFood()) {
                 aPlayer.getFoodStats().addStats(1, 0.0F);
                 GT_ModHandler.useElectricItem(aStack, 50000, aPlayer);
@@ -133,7 +133,7 @@ public class GT_EnergyArmor_Item extends ItemArmor implements ISpecialArmor {
             aPlayer.setFire(0);
         }
 
-        if (!aPlayer.world.isRemote && (mSpecials & 128) != 0) {
+        if (!aPlayer.worldObj.isRemote && (mSpecials & 128) != 0) {
             float var6 = jumpChargeMap.containsKey(aPlayer) ? ((Float) jumpChargeMap.get(aPlayer)).floatValue() : 1.0F;
 
             if (GT_ModHandler.canUseElectricItem(aStack, 1000) && aPlayer.onGround && var6 < 1.0F) {
@@ -186,7 +186,7 @@ public class GT_EnergyArmor_Item extends ItemArmor implements ISpecialArmor {
             }
         }
 
-        if (!aPlayer.world.isRemote && (mSpecials & (16 | 32)) != 0) {
+        if (!aPlayer.worldObj.isRemote && (mSpecials & (16 | 32)) != 0) {
             //if (GregTech_API.sWorldTickCounter%20==0) {
             ItemStack tTargetChargeItem = aStack, tTargetDechargeItem = aStack;
 
@@ -201,15 +201,15 @@ public class GT_EnergyArmor_Item extends ItemArmor implements ISpecialArmor {
                 tTargetChargeItem = null;
             }
 
-            if (aPlayer.world.isDaytime() && aPlayer.world.canBlockSeeTheSky(MathHelper.floor(aPlayer.posX), MathHelper.floor(aPlayer.posY + 1), MathHelper.floor(aPlayer.posZ))) {
+            if (aPlayer.worldObj.isDaytime() && aPlayer.worldObj.canBlockSeeTheSky(MathHelper.floor_double(aPlayer.posX), MathHelper.floor_double(aPlayer.posY + 1), MathHelper.floor_double(aPlayer.posZ))) {
                 if ((mSpecials & 32) != 0 && tTargetChargeItem != null) {
                     GT_ModHandler.chargeElectricItem(tTargetChargeItem, 20, Integer.MAX_VALUE, true, false);
                 }
             } else {
                     /* TODO:
 					if ((mSpecials & 16) != 0 && tTargetDechargeItem != null && GT_ModHandler.canUseElectricItem(tTargetDechargeItem, 10)) {
-						if (aPlayer.world.getBlock	((int)aPlayer.posX, (int)aPlayer.posY+1, (int)aPlayer.posZ) == Blocks.air)
-							aPlayer.world.setBlock	((int)aPlayer.posX, (int)aPlayer.posY+1, (int)aPlayer.posZ, GregTech_API.sBlockList[3]);
+						if (aPlayer.worldObj.getBlock	((int)aPlayer.posX, (int)aPlayer.posY+1, (int)aPlayer.posZ) == Blocks.air)
+							aPlayer.worldObj.setBlock	((int)aPlayer.posX, (int)aPlayer.posY+1, (int)aPlayer.posZ, GregTech_API.sBlockList[3]);
 						GT_ModHandler.useElectricItem(tTargetDechargeItem, 10, aPlayer);
 					}*/
                 //}
@@ -278,7 +278,7 @@ public class GT_EnergyArmor_Item extends ItemArmor implements ISpecialArmor {
 
     // TODO: @ForgeSubscribe
     public void onEntityLivingFallEvent(LivingFallEvent var1) {
-        if (!var1.entity.world.isRemote && var1.entity instanceof EntityPlayer) {
+        if (!var1.entity.worldObj.isRemote && var1.entity instanceof EntityPlayer) {
             EntityPlayer var2 = (EntityPlayer) var1.entity;
             for (int i = 0; i < 4; i++) {
                 ItemStack var3 = var2.inventory.armorInventory[i];

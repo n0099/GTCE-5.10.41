@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
@@ -35,7 +36,7 @@ public class GuiModularArmor extends GuiContainer {
 	}
 
 	protected void drawTooltip(int x, int y) {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<String>();
 		if (x >= 10 && x <= 17) {
 			if (y >= 20 && y <= 27) {
 				list.add(GT_LanguageManager.getTranslation("weight") + ": " + cont.mInvArmor.data.weight);

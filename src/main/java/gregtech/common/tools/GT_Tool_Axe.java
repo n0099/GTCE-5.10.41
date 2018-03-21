@@ -71,7 +71,7 @@ public class GT_Tool_Axe extends GT_Tool {
 
     @Override
     public String getBreakingSound() {
-        return (String) GregTech_API.sSoundList.get(0);
+        return (String) GregTech_API.sSoundList.get(Integer.valueOf(0));
     }
 
     @Override
@@ -100,10 +100,10 @@ public class GT_Tool_Axe extends GT_Tool {
         int rAmount = 0;
         if (GregTech_API.sTimber && !aPlayer.isSneaking() && OrePrefixes.log.contains(getBlockStack(aBlock))) {
             int tY = pos.getY() + 1;
-            for (int tH = aPlayer.world.getHeight(); tY < tH; tY++) {
+            for (int tH = aPlayer.worldObj.getHeight(); tY < tH; tY++) {
                 BlockPos block = new BlockPos(pos.getX(), tY, pos.getZ());
-                if (!isStateEqual(aPlayer.world.getBlockState(block), aBlock) ||
-                        !aPlayer.world.destroyBlock(block, true)) break;
+                if (!isStateEqual(aPlayer.worldObj.getBlockState(block), aBlock) ||
+                        !aPlayer.worldObj.destroyBlock(block, true)) break;
                 rAmount++;
             }
         }

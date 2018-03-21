@@ -1,6 +1,7 @@
 package gregtech.common.items.armor;
 
 import gregtech.api.util.GT_LanguageManager;
+import gregtech.api.util.GT_Utility;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -16,8 +17,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 @SideOnly(Side.CLIENT)
 public class GuiElectricArmor1 extends GuiContainer {
@@ -198,7 +207,7 @@ public class GuiElectricArmor1 extends GuiContainer {
 	}
 	
 	protected void drawTooltip(int x, int y) {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<String>();
 		//General tooltips
 		if(x>=7&&y>=11&&x<=33&&y<=17){
 				list.add(GT_LanguageManager.getTranslation("weight") + ": " + cont.mInvArmor.data.weight);

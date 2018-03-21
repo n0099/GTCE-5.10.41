@@ -39,9 +39,9 @@ public class GT_Item_Machines extends ItemBlock {
             if ((tDamage <= 0) || (tDamage >= GregTech_API.METATILEENTITIES.length)) {
                 return;
             }
-            TileEntity temp = GregTech_API.sBlockMachines.createNewTileEntity(aPlayer == null ? GT_Values.DW : aPlayer.world, GregTech_API.METATILEENTITIES[tDamage] == null ? 0 : GregTech_API.METATILEENTITIES[tDamage].getTileEntityBaseType());
+            TileEntity temp = GregTech_API.sBlockMachines.createNewTileEntity(aPlayer == null ? GT_Values.DW : aPlayer.worldObj, GregTech_API.METATILEENTITIES[tDamage] == null ? 0 : GregTech_API.METATILEENTITIES[tDamage].getTileEntityBaseType());
             if (temp != null) {
-                temp.setworld(aPlayer == null ? GT_Values.DW : aPlayer.world);
+                temp.setWorldObj(aPlayer == null ? GT_Values.DW : aPlayer.worldObj);
                 temp.setPos(BlockPos.ORIGIN);
                 if ((temp instanceof IGregTechTileEntity)) {
                     IGregTechTileEntity tTileEntity = (IGregTechTileEntity) temp;

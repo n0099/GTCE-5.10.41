@@ -9,7 +9,7 @@ import java.util.*;
 public class ItemData {
     private static final MaterialStack[] EMPTY_MATERIALSTACK_ARRAY = new MaterialStack[0];
 
-    public final List<Object> mExtraData = new GT_ArrayList<>(false, 1);
+    public final List<Object> mExtraData = new GT_ArrayList<Object>(false, 1);
     public final OrePrefixes mPrefix;
     public final MaterialStack mMaterial;
     public final MaterialStack[] mByProducts;
@@ -36,9 +36,9 @@ public class ItemData {
         } else {
             MaterialStack[] tByProducts = aByProducts.length < 1 ? EMPTY_MATERIALSTACK_ARRAY : new MaterialStack[aByProducts.length];
             int j = 0;
-            for (MaterialStack aByProduct : aByProducts)
-                if (aByProduct != null && aByProduct.mMaterial != null)
-                    tByProducts[j++] = aByProduct.clone();
+            for (int i = 0; i < aByProducts.length; i++)
+                if (aByProducts[i] != null && aByProducts[i].mMaterial != null)
+                    tByProducts[j++] = aByProducts[i].clone();
             mByProducts = j > 0 ? new MaterialStack[j] : EMPTY_MATERIALSTACK_ARRAY;
             for (int i = 0; i < mByProducts.length; i++) mByProducts[i] = tByProducts[i];
         }
@@ -56,7 +56,7 @@ public class ItemData {
         mPrefix = null;
         mBlackListed = true;
 
-        ArrayList<MaterialStack> aList = new ArrayList<>(), rList = new ArrayList<>();
+        ArrayList<MaterialStack> aList = new ArrayList<MaterialStack>(), rList = new ArrayList<MaterialStack>();
 
         for (ItemData tData : aData)
             if (tData != null) {

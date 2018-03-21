@@ -50,7 +50,7 @@ public class JEIGregtechRecipe implements IRecipeWrapper {
             case 2:
                 if (mRecipe.getNEIAdaptedInput(tStartIndex) != null) {
                     mInputs.init(tStartIndex, true, 30 + 1, 14);
-                    mInputs.set(tStartIndex, mRecipe.getNEIAdaptedInput(tStartIndex));
+                    mInputs.set(tStartIndex, mRecipe.getNEIAdaptedInput(tStartIndex));;
                 }
                 tStartIndex++;
                 if (mRecipe.getNEIAdaptedInput(tStartIndex) != null) {

@@ -13,6 +13,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import java.util.Iterator;
+
 public class GT_Container_MicrowaveEnergyTransmitter
         extends GT_ContainerMetaTile_Machine {
     public int mEgg = 0;

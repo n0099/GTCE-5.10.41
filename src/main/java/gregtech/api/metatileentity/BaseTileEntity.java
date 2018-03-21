@@ -1,13 +1,14 @@
 package gregtech.api.metatileentity;
 
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.interfaces.tileentity.IHasworldectAndCoords;
+import gregtech.api.interfaces.tileentity.IHasWorldObjectAndCoords;
 import gregtech.api.net.GT_Packet_Block_Event;
 import gregtech.api.util.GT_Utility;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -25,7 +26,7 @@ import static gregtech.api.enums.GT_Values.NW;
  * <p/>
  * Basically everything a TileEntity should have.
  */
-public abstract class BaseTileEntity extends TileEntity implements IHasworldectAndCoords, ITickable {
+public abstract class BaseTileEntity extends TileEntity implements IHasWorldObjectAndCoords, ITickable {
     /**
      * Buffers adjacent TileEntities for faster access
      * <p/>
@@ -56,8 +57,8 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
     }
 
     @Override
-    public World getworld() {
-        return world;
+    public World getWorldObj() {
+        return worldObj;
     }
 
     @Override
@@ -82,12 +83,12 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
 
     @Override
     public final boolean isServerSide() {
-        return !world.isRemote;
+        return !worldObj.isRemote;
     }
 
     @Override
     public final boolean isClientSide() {
-        return world.isRemote;
+        return worldObj.isRemote;
     }
 
     @Override
@@ -98,25 +99,25 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
     @Override
     public final boolean openGUI(EntityPlayer aPlayer, int aID) {
         if (aPlayer == null) return false;
-        aPlayer.openGui(GT, aID, world, getXCoord(), getYCoord(), getZCoord());
+        aPlayer.openGui(GT, aID, worldObj, getXCoord(), getYCoord(), getZCoord());
         return true;
     }
 
     @Override
     public final int getRandomNumber(int aRange) {
-        return world.rand.nextInt(aRange);
+        return worldObj.rand.nextInt(aRange);
     }
 
     private BlockPos.MutableBlockPos M = new BlockPos.MutableBlockPos();
 
     @Override
     public final Biome getBiome() {
-        return world.getBiome(getPos());
+        return worldObj.getBiome(getPos());
     }
 
     @Override
     public final IBlockState getBlockStateOffset(int aX, int aY, int aZ) {
-        return world.getBlockState(M.setPos(getXCoord() + aX, getYCoord() + aY, getZCoord() + aZ));
+        return worldObj.getBlockState(M.setPos(getXCoord() + aX, getYCoord() + aY, getZCoord() + aZ));
     }
 
     @Override
@@ -173,7 +174,7 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
 
     @Override
     public final boolean getSkyOffset(int aX, int aY, int aZ) {
-        return world.canSeeSky(M.setPos(getXCoord() + aX, getYCoord() + aY, getZCoord() + aZ));
+        return worldObj.canSeeSky(M.setPos(getXCoord() + aX, getYCoord() + aY, getZCoord() + aZ));
     }
 
     @Override
@@ -189,7 +190,7 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
 
     @Override
     public final boolean getAirOffset(int aX, int aY, int aZ) {
-        return world.isAirBlock(M.setPos(getXCoord() + aX, getYCoord() + aY, getZCoord() + aZ));
+        return worldObj.isAirBlock(M.setPos(getXCoord() + aX, getYCoord() + aY, getZCoord() + aZ));
     }
 
     @Override
@@ -205,7 +206,7 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
 
     @Override
     public final TileEntity getTileEntityOffset(int aX, int aY, int aZ) {
-        return world.getTileEntity(M.setPos(getXCoord() + aX, getYCoord() + aY, getZCoord() + aZ));
+        return worldObj.getTileEntity(M.setPos(getXCoord() + aX, getYCoord() + aY, getZCoord() + aZ));
     }
 
     @Override
@@ -263,51 +264,51 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
     @Override
     public final Block getBlock(int aX, int aY, int aZ) {
         M.setPos(aX, aY, aZ);
-        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !world.isBlockLoaded(M))
+        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !worldObj.isBlockLoaded(M))
             return Blocks.AIR;
-        return world.getBlockState(M).getBlock();
+        return worldObj.getBlockState(M).getBlock();
     }
 
     @Override
     public final byte getMetaID(int aX, int aY, int aZ) {
         M.setPos(aX, aY, aZ);
-        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !world.isBlockLoaded(M))
+        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !worldObj.isBlockLoaded(M))
             return 0;
-        IBlockState blockState = world.getBlockState(M);
+        IBlockState blockState = worldObj.getBlockState(M);
         return (byte) blockState.getBlock().getMetaFromState(blockState);
     }
 
     @Override
     public final boolean getSky(int aX, int aY, int aZ) {
         M.setPos(aX, aY, aZ);
-        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !world.isBlockLoaded(M))
+        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !worldObj.isBlockLoaded(M))
             return false;
-        return world.canSeeSky(M);
+        return worldObj.canSeeSky(M);
     }
 
     @Override
     public final boolean getOpacity(int aX, int aY, int aZ) {
         M.setPos(aX, aY, aZ);
-        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !world.isBlockLoaded(M))
+        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !worldObj.isBlockLoaded(M))
             return false;
-        IBlockState blockState = world.getBlockState(M);
+        IBlockState blockState = worldObj.getBlockState(M);
         return blockState.isOpaqueCube();
     }
 
     @Override
     public final boolean getAir(int aX, int aY, int aZ) {
         M.setPos(aX, aY, aZ);
-        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !world.isBlockLoaded(M))
+        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !worldObj.isBlockLoaded(M))
             return false;
-        return world.isAirBlock(M);
+        return worldObj.isAirBlock(M);
     }
 
     @Override
     public final TileEntity getTileEntity(int aX, int aY, int aZ) {
         M.setPos(aX, aY, aZ);
-        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !world.isBlockLoaded(M))
+        if (ignoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !worldObj.isBlockLoaded(M))
             return null;
-        return world.getTileEntity(M);
+        return worldObj.getTileEntity(M);
     }
 
     @Override
@@ -319,10 +320,10 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
         int tX = getOffsetX(aSide, 1), tY = getOffsetY(aSide, 1), tZ = getOffsetZ(aSide, 1);
         if (crossedChunkBorder(tX, tZ)) {
             mBufferedTileEntities[aSide] = null;
-            if (ignoreUnloadedChunks && !world.isBlockLoaded(M)) return null;
+            if (ignoreUnloadedChunks && !worldObj.isBlockLoaded(M)) return null;
         }
         if (mBufferedTileEntities[aSide] == null) {
-            mBufferedTileEntities[aSide] = world.getTileEntity(M);
+            mBufferedTileEntities[aSide] = worldObj.getTileEntity(M);
             if (mBufferedTileEntities[aSide] == null) {
                 mBufferedTileEntities[aSide] = this;
                 return null;
@@ -341,22 +342,22 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
 
     @Override
     public IBlockState getBlockState(BlockPos pos) {
-        return world.getBlockState(pos);
+        return worldObj.getBlockState(pos);
     }
 
     @Override
     public boolean setBlockState(BlockPos pos, IBlockState state) {
-        return world.setBlockState(pos, state);
+        return worldObj.setBlockState(pos, state);
     }
 
     @Override
     public boolean setBlockToAir(BlockPos pos) {
-        return world.setBlockToAir(pos);
+        return worldObj.setBlockToAir(pos);
     }
 
     @Override
     public boolean isAir(BlockPos pos) {
-        return world.isAirBlock(pos);
+        return worldObj.isAirBlock(pos);
     }
 
     @Override
@@ -418,7 +419,7 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
 
     @Override
     public final void sendBlockEvent(byte aID, byte aValue) {
-        NW.sendToAllAround(world, new GT_Packet_Block_Event(getXCoord(),
+        NW.sendToAllAround(worldObj, new GT_Packet_Block_Event(getXCoord(),
                                                                (short) getYCoord(),
                                                                getZCoord(),
                                                                aID,
@@ -433,11 +434,11 @@ public abstract class BaseTileEntity extends TileEntity implements IHasworldectA
     }
 
     public final void setOnFire() {
-        GT_Utility.setCoordsOnFire(world, getXCoord(), getYCoord(), getZCoord(), false);
+        GT_Utility.setCoordsOnFire(worldObj, getXCoord(), getYCoord(), getZCoord(), false);
     }
 
     public final void setToFire() {
-        world.setBlockState(getPos(), Blocks.FIRE.getDefaultState());
+        worldObj.setBlockState(getPos(), Blocks.FIRE.getDefaultState());
     }
     
     @Override 

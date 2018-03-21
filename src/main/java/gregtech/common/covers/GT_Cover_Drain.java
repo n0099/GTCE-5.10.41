@@ -29,11 +29,11 @@ public class GT_Cover_Drain
             Block tBlock = aTileEntity.getBlockAtSide(aSide);
             if ((aCoverVariable < 3) && ((aTileEntity instanceof IFluidHandler))) {
                 if ((aSide == 1) &&
-                        (aTileEntity.getworld().isRaining()) &&
-                        (aTileEntity.getworld().getPrecipitationHeight(aTileEntity.getWorldPos()).getY() - 2 < aTileEntity.getYCoord())) {
+                        (aTileEntity.getWorldObj().isRaining()) &&
+                        (aTileEntity.getWorldObj().getPrecipitationHeight(aTileEntity.getWorldPos()).getY() - 2 < aTileEntity.getYCoord())) {
                     int tAmount = (int) (aTileEntity.getBiome().getRainfall() * 10.0F);
                     if (tAmount > 0) {
-                        ((IFluidHandler) aTileEntity).fill(sideFacing, Materials.Water.getFluid(aTileEntity.getworld().isThundering() ? tAmount * 2 : tAmount), true);
+                        ((IFluidHandler) aTileEntity).fill(sideFacing, Materials.Water.getFluid(aTileEntity.getWorldObj().isThundering() ? tAmount * 2 : tAmount), true);
                     }
                 }
                 FluidStack tLiquid = null;
@@ -43,17 +43,17 @@ public class GT_Cover_Drain
                     } else if (((tBlock == Blocks.LAVA) || (tBlock == Blocks.FLOWING_LAVA)) && (aTileEntity.getMetaIDAtSide(aSide) == 0)) {
                         tLiquid = Materials.Lava.getFluid(1000L);
                     } else if ((tBlock instanceof IFluidBlock)) {
-                        tLiquid = ((IFluidBlock) tBlock).drain(aTileEntity.getworld(), aTileEntity.getWorldPos().offset(sideFacing), false);
+                        tLiquid = ((IFluidBlock) tBlock).drain(aTileEntity.getWorldObj(), aTileEntity.getWorldPos().offset(sideFacing), false);
                     }
                     if ((tLiquid != null) && (tLiquid.getFluid() != null) && ((aSide > 1) || ((aSide == 0) && (tLiquid.getFluid().getDensity() <= 0)) || ((aSide == 1) && (tLiquid.getFluid().getDensity() >= 0))) &&
                             (((IFluidHandler) aTileEntity).fill(sideFacing, tLiquid, false) == tLiquid.amount)) {
                         ((IFluidHandler) aTileEntity).fill(sideFacing, tLiquid, true);
-                        aTileEntity.getworld().setBlockToAir(aTileEntity.getWorldPos().offset(sideFacing));
+                        aTileEntity.getWorldObj().setBlockToAir(aTileEntity.getWorldPos().offset(sideFacing));
                     }
                 }
             }
             if ((aCoverVariable >= 3) && (tBlock != null) && (tBlock instanceof IFluidBlock || tBlock instanceof BlockDynamicLiquid || tBlock instanceof BlockStaticLiquid)) {
-                aTileEntity.getworld().setBlockToAir(aTileEntity.getWorldPos().offset(sideFacing));
+                aTileEntity.getWorldObj().setBlockToAir(aTileEntity.getWorldPos().offset(sideFacing));
             }
         }
         return aCoverVariable;

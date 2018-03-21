@@ -104,18 +104,18 @@ public abstract class GT_MetaTileEntity_FusionComputer extends GT_MetaTileEntity
                 && (addIfInjector(xCenter - 6, yCenter - 1, zCenter - 1, aBaseMetaTileEntity)) && (addIfInjector(xCenter + 6, yCenter - 1, zCenter - 1, aBaseMetaTileEntity))
                 && (this.mEnergyHatches.size() >= 1) && (this.mOutputHatches.size() >= 1) && (this.mInputHatches.size() >= 2)) {
             int mEnergyHatches_sS = this.mEnergyHatches.size();
-            for (GT_MetaTileEntity_Hatch_Energy mEnergyHatche : this.mEnergyHatches) {
-                if (mEnergyHatche.mTier < tier())
+            for (int i = 0; i < mEnergyHatches_sS; i++) {
+                if (this.mEnergyHatches.get(i).mTier < tier())
                     return false;
             }
             int mOutputHatches_sS = this.mOutputHatches.size();
-            for (GT_MetaTileEntity_Hatch_Output mOutputHatche : this.mOutputHatches) {
-                if (mOutputHatche.mTier < tier())
+            for (int i = 0; i < mOutputHatches_sS; i++) {
+                if (this.mOutputHatches.get(i).mTier < tier())
                     return false;
             }
             int mInputHatches_sS = this.mInputHatches.size();
-            for (GT_MetaTileEntity_Hatch_Input mInputHatche : this.mInputHatches) {
-                if (mInputHatche.mTier < tier())
+            for (int i = 0; i < mInputHatches_sS; i++) {
+                if (this.mInputHatches.get(i).mTier < tier())
                     return false;
             }
             mWrench = true;
@@ -341,7 +341,7 @@ public abstract class GT_MetaTileEntity_FusionComputer extends GT_MetaTileEntity
                                 mEfficiencyIncrease = 0;
                                 if (mOutputFluids != null && mOutputFluids.length > 0) {
                                     try {
-                                        GT_Mod.instance.achievements.issueAchivementHatchFluid(aBaseMetaTileEntity.getworld().getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()), mOutputFluids[0]);
+                                        GT_Mod.instance.achievements.issueAchivementHatchFluid(aBaseMetaTileEntity.getWorldObj().getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()), mOutputFluids[0]);
                                     } catch (Exception e) {
                                     }
                                 }

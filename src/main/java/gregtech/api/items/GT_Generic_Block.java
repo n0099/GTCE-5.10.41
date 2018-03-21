@@ -2,6 +2,7 @@ package gregtech.api.items;
 
 import codechicken.lib.render.particle.CustomParticleHandler;
 import codechicken.lib.vec.Cuboid6;
+import gregtech.api.enums.Textures;
 import gregtech.api.util.GT_LanguageManager;
 import gregtech.common.render.RenderBlocks;
 import net.minecraft.block.Block;
@@ -28,6 +29,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Arrays;
+
 import static gregtech.api.enums.GT_Values.W;
 
 public abstract class GT_Generic_Block extends Block {
@@ -46,14 +49,14 @@ public abstract class GT_Generic_Block extends Block {
     }
 
     @Override
-    public boolean addLandingEffects(IBlockState state, WorldServer world, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
+    public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles) {
         return true;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean addHitEffects(IBlockState state, World world, RayTraceResult target, ParticleManager manager) {
-        CustomParticleHandler.addBlockHitEffects(world, getBlockBounds(target.getBlockPos()), target.sideHit, getParticleSprite(world, target.getBlockPos(), target.sideHit), manager);
+    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager) {
+        CustomParticleHandler.addBlockHitEffects(worldObj, getBlockBounds(target.getBlockPos()), target.sideHit, getParticleSprite(worldObj, target.getBlockPos(), target.sideHit), manager);
         return true;
     }
 
@@ -70,8 +73,8 @@ public abstract class GT_Generic_Block extends Block {
 
 
     @SideOnly(Side.CLIENT)
-    public TextureAtlasSprite getParticleSprite(IBlockAccess world, BlockPos aPos, EnumFacing side) {
-        return getWorldIcon(world, aPos, world.getBlockState(aPos), side);
+    public TextureAtlasSprite getParticleSprite(IBlockAccess worldObj, BlockPos aPos, EnumFacing side) {
+        return getWorldIcon(worldObj, aPos, worldObj.getBlockState(aPos), side);
     }
     
     @SideOnly(Side.CLIENT)

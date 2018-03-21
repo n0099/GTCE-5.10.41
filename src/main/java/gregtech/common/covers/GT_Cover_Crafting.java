@@ -17,7 +17,7 @@ public class GT_Cover_Crafting extends GT_CoverBehavior {
             playerMP.getNextWindowId();
 
             playerMP.connection.sendPacket(new SPacketOpenWindow(playerMP.currentWindowId, "minecraft:crafting_table", new TextComponentString("Crafting")));
-            playerMP.openContainer = new ContainerWorkbench(playerMP.inventory, playerMP.world, new BlockPos(playerMP)) {
+            playerMP.openContainer = new ContainerWorkbench(playerMP.inventory, playerMP.worldObj, new BlockPos(playerMP)) {
                 @Override
                 public boolean canInteractWith(EntityPlayer playerIn) {
                     return true;

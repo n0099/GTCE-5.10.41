@@ -47,7 +47,7 @@ public class GT_LanguageManager {
     }
 
     public static synchronized void readFromLangFile(String langFilePath) {
-        List<String> langFileRows = new ArrayList<>();
+        List<String> langFileRows = new ArrayList<String>();
         if (FMLCommonHandler.instance().getSide().isClient()) {
             File langFile = new File(langFilePath);
             if (langFile.exists() & langFile.isFile()) {

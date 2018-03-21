@@ -92,7 +92,7 @@ public class GT_MetaTileEntity_MagicalEnergyAbsorber extends GT_MetaTileEntity_B
             // Energyzed node
             /*if (isThaumcraftLoaded) {
                 try {
-                    World tmpWorld = this.getBaseMetaTileEntity().getworld();
+                    World tmpWorld = this.getBaseMetaTileEntity().getWorldObj();
                     int tmpX = this.getBaseMetaTileEntity().getXCoord();
                     int tmpY = this.getBaseMetaTileEntity().getYCoord();
                     int tmpZ = this.getBaseMetaTileEntity().getZCoord();
@@ -125,7 +125,7 @@ public class GT_MetaTileEntity_MagicalEnergyAbsorber extends GT_MetaTileEntity_B
             // EnderCrystal
             if (sEnergyPerEnderCrystal > 0) {
                 if (this.mTargetedCrystal == null) {
-                    List<EntityEnderCrystal> tList = getBaseMetaTileEntity().getworld().getEntitiesWithinAABB(
+                    List<EntityEnderCrystal> tList = getBaseMetaTileEntity().getWorldObj().getEntitiesWithinAABB(
                             EntityEnderCrystal.class,
                             new AxisAlignedBB(
                                     getBaseMetaTileEntity().getXCoord() - 64,

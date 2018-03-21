@@ -312,9 +312,9 @@ public class GT_MetaTileEntity_Pump extends GT_MetaTileEntity_Hatch {
             }
             if ((aBlock instanceof IFluidBlock)) {
                 if (this.mFluid == null) {
-                    this.mFluid = ((IFluidBlock) aBlock).drain(getBaseMetaTileEntity().getworld(), pos, true);
+                    this.mFluid = ((IFluidBlock) aBlock).drain(getBaseMetaTileEntity().getWorldObj(), pos, true);
                     getBaseMetaTileEntity().decreaseStoredEnergyUnits(this.mFluid == null ? 1000 : this.mFluid.amount, true);
-                } else if (this.mFluid.isFluidEqual(((IFluidBlock) aBlock).drain(getBaseMetaTileEntity().getworld(), pos, false))) {
+                } else if (this.mFluid.isFluidEqual(((IFluidBlock) aBlock).drain(getBaseMetaTileEntity().getWorldObj(), pos, false))) {
                     this.getBaseMetaTileEntity().setBlockToAir(pos);
                     this.mFluid.amount += 1000;
                     getBaseMetaTileEntity().decreaseStoredEnergyUnits(16 * ((int) Math.pow(4, this.mTier)), true);

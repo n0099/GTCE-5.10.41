@@ -70,15 +70,15 @@ public class GT_MetaTileEntity_SeismicProspector extends GT_MetaTileEntity_Basic
             } else if (ready && mMaxProgresstime == 0 && aStack != null && aStack.stackSize == 1 && aStack.getItem() == ItemList.Tool_DataStick.getItem()) {
                 this.ready = false;
                 GT_Utility.ItemNBT.setBookTitle(aPlayer.getHeldItem(hand), "Raw Prospection Data");
-                List<String> tStringList = new ArrayList<>();
+                List<String> tStringList = new ArrayList<String>();
                 for (int i = this.getBaseMetaTileEntity().getYCoord(); i > 0; i--) {
                     for (int f = -2; f < 3; f++) {
                         for (int g = -2; g < 3; g++) {
                             BlockPos blockPos = aBaseMetaTileEntity.getWorldPos().add(f, -i, g);
-                            IBlockState blockState = aBaseMetaTileEntity.getworld().getBlockState(blockPos);
+                            IBlockState blockState = aBaseMetaTileEntity.getWorldObj().getBlockState(blockPos);
                             Block tBlock = blockState.getBlock();
                             /*if ((tBlock instanceof GT_Block_Ores_Abstract)) {
-                                TileEntity tTileEntity = getBaseMetaTileEntity().getworld().getTileEntity(aBaseMetaTileEntity.getWorldPos().add(f, -i, g));
+                                TileEntity tTileEntity = getBaseMetaTileEntity().getWorldObj().getTileEntity(aBaseMetaTileEntity.getWorldPos().add(f, -i, g));
                                 if ((tTileEntity instanceof GT_TileEntity_Ores)) {
                                 	if(((GT_TileEntity_Ores) tTileEntity).mMetaData < 16000){
                                     Materials tMaterial = GregTech_API.sGeneratedMaterials[(((GT_TileEntity_Ores) tTileEntity).mMetaData % 1000)];
@@ -102,14 +102,14 @@ public class GT_MetaTileEntity_SeismicProspector extends GT_MetaTileEntity_Basic
                     }
                 }
                 if(tStringList.size()<1){tStringList.add("No Ores found.");}
-                FluidStack tFluid = GT_Utility.getUndergroundOil(getBaseMetaTileEntity().getworld(), getBaseMetaTileEntity().getXCoord(), getBaseMetaTileEntity().getZCoord());
+                FluidStack tFluid = GT_Utility.getUndergroundOil(getBaseMetaTileEntity().getWorldObj(), getBaseMetaTileEntity().getXCoord(), getBaseMetaTileEntity().getZCoord());
                 String[] tStringArray = new String[tStringList.size()];
                 {
                     for (int i = 0; i < tStringArray.length; i++) {
                         tStringArray[i] = tStringList.get(i);
                     }
                 }
-                GT_Utility.ItemNBT.setProspectionData(aPlayer.getHeldItem(hand), this.getBaseMetaTileEntity().getXCoord(), this.getBaseMetaTileEntity().getYCoord(), this.getBaseMetaTileEntity().getZCoord(), this.getBaseMetaTileEntity().getworld().provider.getDimension(), tFluid, tStringArray);
+                GT_Utility.ItemNBT.setProspectionData(aPlayer.getHeldItem(hand), this.getBaseMetaTileEntity().getXCoord(), this.getBaseMetaTileEntity().getYCoord(), this.getBaseMetaTileEntity().getZCoord(), this.getBaseMetaTileEntity().getWorldObj().provider.getDimension(), tFluid, tStringArray);
             }
         }
 

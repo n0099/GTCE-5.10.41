@@ -1,6 +1,8 @@
 package gregtech.api.enchants;
 
+import gregtech.api.enums.ConfigCategories;
 import gregtech.api.enums.Materials;
+import gregtech.api.util.GT_Config;
 import gregtech.api.util.GT_LanguageManager;
 import net.minecraft.enchantment.EnchantmentDamage;
 import net.minecraft.entity.Entity;
@@ -8,6 +10,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 public class Enchantment_EnderDamage extends EnchantmentDamage {
@@ -42,7 +46,7 @@ public class Enchantment_EnderDamage extends EnchantmentDamage {
 
     @Override
     public void onEntityDamaged(EntityLivingBase aHurtEntity, Entity aDamagingEntity, int aLevel) {
-        if ((aHurtEntity instanceof EntityEnderman || aHurtEntity instanceof EntityDragon || (aHurtEntity.getClass().getName().contains(".") && aHurtEntity.getClass().getName().substring(aHurtEntity.getClass().getName().lastIndexOf(".")).contains("Ender")))) {
+        if ((aHurtEntity instanceof EntityEnderman || aHurtEntity instanceof EntityDragon || (aHurtEntity.getClass().getName().indexOf(".") >= 0 && aHurtEntity.getClass().getName().substring(aHurtEntity.getClass().getName().lastIndexOf(".")).contains("Ender")))) {
             // Weakness causes Endermen to not be able to teleport with GT being installed.
             aHurtEntity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, aLevel * 200, Math.max(1, (5 * aLevel) / 7)));
             // They also get Poisoned. If you have this Enchant on an Arrow, you can kill the Ender Dragon easier.

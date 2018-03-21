@@ -108,8 +108,8 @@ public class GT_Tool_Chainsaw_LV extends GT_Tool_Saw {
         int rAmount = 0;
         if ((aBlock.getMaterial() == Material.LEAVES) && aBlock.getBlock() instanceof IShearable) {
             IShearable shearable = (IShearable) aBlock.getBlock();
-            if (shearable.isShearable(aStack, aPlayer.world, pos)) {
-                List<ItemStack> tDrops = shearable.onSheared(aStack, aPlayer.world, pos, aFortune);
+            if (shearable.isShearable(aStack, aPlayer.worldObj, pos)) {
+                List<ItemStack> tDrops = shearable.onSheared(aStack, aPlayer.worldObj, pos, aFortune);
                 aDrops.clear();
                 aDrops.addAll(tDrops);
                 aEvent.setDropChance(1.0F);
@@ -119,31 +119,31 @@ public class GT_Tool_Chainsaw_LV extends GT_Tool_Saw {
                     double d = itemRand.nextFloat() * f + (1.0F - f) * 0.5D;
                     double d1 = itemRand.nextFloat() * f + (1.0F - f) * 0.5D;
                     double d2 = itemRand.nextFloat() * f + (1.0F - f) * 0.5D;
-                    EntityItem entityitem = new EntityItem(aPlayer.world,
+                    EntityItem entityitem = new EntityItem(aPlayer.worldObj,
                             pos.getX() + d,
                             pos.getY() + d1,
                             pos.getZ() + d2, stack);
                     entityitem.setDefaultPickupDelay();
-                    aPlayer.world.spawnEntity(entityitem);
+                    aPlayer.worldObj.spawnEntityInWorld(entityitem);
                 }
                 aPlayer.addStat(StatList.MINE_BLOCK_STATS.get(Block.getIdFromBlock(aBlock.getBlock())), 1);
             }
-            aPlayer.world.setBlockToAir(pos);
+            aPlayer.worldObj.setBlockToAir(pos);
         } else 
         	if ((aBlock.getMaterial() == Material.ICE ||
                     aBlock.getMaterial() == Material.PACKED_ICE) &&
                     aDrops.isEmpty()) {
             aDrops.add(getBlockStack(aBlock));
-            aPlayer.world.setBlockToAir(pos);
+            aPlayer.worldObj.setBlockToAir(pos);
             aEvent.setDropChance(1.0F);
             return 1;
         }
         if (GregTech_API.sTimber && !aPlayer.isSneaking() &&
                 OrePrefixes.log.contains(getBlockStack(aBlock))) {
-            for (int y = 0; y < aPlayer.world.getHeight() - pos.up().getY(); y++) {
+            for (int y = 0; y < aPlayer.worldObj.getHeight() - pos.up().getY(); y++) {
                 BlockPos block = pos.up(y);
-                if (!isStateEqual(aPlayer.world.getBlockState(block), aBlock) ||
-                        !aPlayer.world.destroyBlock(block, true)) break;
+                if (!isStateEqual(aPlayer.worldObj.getBlockState(block), aBlock) ||
+                        !aPlayer.worldObj.destroyBlock(block, true)) break;
                 rAmount++;
             }
         }
