@@ -47,7 +47,7 @@ public class GT_MetaGenerated_Item_01 extends GT_MetaGenerated_Item_X32 {
                 ItemList.Cell_Water.set(GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Water, 1));
                 ItemList.Cell_Lava.set(GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Lava, 1));
 
-                OrePrefixes.cellPlasma.mContainerItem = ItemList.Cell_Empty.get(1);
+                //OrePrefixes.cellPlasma.mContainerItem = ItemList.Cell_Empty.get(1);
                 OrePrefixes.cell.mContainerItem = ItemList.Cell_Empty.get(1);
 
                 int tLastID = 0;
