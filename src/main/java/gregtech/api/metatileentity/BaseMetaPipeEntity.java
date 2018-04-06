@@ -312,7 +312,7 @@ public class BaseMetaPipeEntity extends BaseTileEntity implements IGregTechTileE
             if (mTimeStatistics.length > 0)
                 mTimeStatistics[mTimeStatisticsIndex = (mTimeStatisticsIndex + 1) % mTimeStatistics.length] = (int) tTime;
             if (tTime > 0 && tTime > GregTech_API.MILLISECOND_THRESHOLD_UNTIL_LAG_WARNING && mTickTimer > 1000 && getMetaTileEntity().doTickProfilingMessageDuringThisTick() && mLagWarningCount++ < 10)
-                FMLLog.warning("WARNING: Possible Lag Source at [%s,%s,%s] in Dimension %s with %s ms caused by an instance of %s", getXCoord(), getYCoord(), getZCoord(), worldObj.getProviderName(), tTime, getMetaTileEntity().getClass());
+                FMLLog.warning("WARNING: Possible Lag Source at [%s,%s,%s] in Dimension n0099 with %s ms caused by an instance of %s", getXCoord(), getYCoord(), getZCoord(), tTime, getMetaTileEntity().getClass());
         }
 
         mWorkUpdate = mInventoryChanged = false;
