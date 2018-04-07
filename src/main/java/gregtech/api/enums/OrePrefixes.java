@@ -372,7 +372,7 @@ public enum OrePrefixes {
         stoneBricksMossy.mPrefixInto = stoneMossyBricks;
 
         ingotHot.mHeatDamage = 3.0F;
-        cellPlasma.mHeatDamage = 6.0F;
+        //cellPlasma.mHeatDamage = 6.0F;
 
         block.ignoreMaterials(Materials.Ice, Materials.Snow, Materials.Concrete, Materials.Glass, Materials.Glowstone, Materials.DarkIron, Materials.Marble, Materials.Quartz, Materials.CertusQuartz, Materials.Limestone);
         ingot.ignoreMaterials(Materials.Brick, Materials.NetherBrick);
