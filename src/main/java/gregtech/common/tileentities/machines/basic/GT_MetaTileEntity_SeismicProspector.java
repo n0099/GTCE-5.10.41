@@ -52,7 +52,7 @@ public class GT_MetaTileEntity_SeismicProspector extends GT_MetaTileEntity_Basic
             		(aStack.getItem() == Item.getItemFromBlock(Blocks.TNT) && aStack.stackSize > 3 ) || 
             		(aStack.getItem() == GT_ModHandler.getIC2Item(BlockName.te, TeBlock.itnt, 1).getItem() && aStack.stackSize > 1 ) ||
             		(aStack.getItem() == GT_ModHandler.getIC2Item(ItemName.dynamite, 1).getItem() && aStack.stackSize > 7 ) ||
-            		(GT_OreDictUnificator.getItemData(aStack).mMaterial.mMaterial == Materials.Glyceryl  && aStack.stackSize > 0 )
+            		(GT_OreDictUnificator.getItemData(aStack).mMaterial.mMaterial == null && (GT_OreDictUnificator.getItemData(aStack).mMaterial.mMaterial == Materials.Glyceryl  && aStack.stackSize > 0))
             		) ) {
                 if ((!aPlayer.capabilities.isCreativeMode) && (aStack.stackSize != 111)) {
                 	if(aStack.getItem() == Item.getItemFromBlock(Blocks.TNT)){
